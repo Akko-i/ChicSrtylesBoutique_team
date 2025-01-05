@@ -1,0 +1,218 @@
+/* My Account page CSS */
+
+/* header{
+    width: 99.1vw;
+} */
+
+
+/* -------------------------
+    My Account
+  -------------------------*/
+
+/* -------------------------
+    Order
+-------------------------*/
+#myaccount{
+    display: flex;
+    gap: 80px;
+    justify-content: space-between;
+    max-width: 1360px;
+    margin: 80px auto;
+    padding: 0 20px;
+}
+#myaccount aside{
+    flex:1;
+}
+#myaccount main{
+    flex:3;
+}
+.shipped{
+    color: #30A31B;
+}
+.processing{
+    color: #DE9409;
+}
+.pending{
+    color: #C30A0A;
+}
+
+
+/* aside */
+aside .welcome{
+    font-size: 21px;
+    margin-bottom: 20px;
+}
+aside hr{
+    margin-bottom: 10px;
+}
+aside nav ul li{
+    padding: 15px 30px;
+    transition:0.2s all;
+}
+aside nav ul li:hover{
+    background-color: #F0EFEA;
+    border-radius: 5px;
+}
+main #orders ul li{
+    border: 1px solid #000;
+    padding: 40px;
+}
+main #orders ul li:not(:last-child){
+    margin-bottom: 20px;
+}
+main #orders h3{
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+main #orders ul li .order-thum, main #orders ul li .order-summary, main #orders ul li .order-summary tbody{
+    display: flex;
+}
+main #orders ul li .order-thum{
+    margin-bottom: 20px;
+}
+main #orders ul li .order-thum img{
+    max-width: 100px;
+    margin-right: 20px;
+    border-radius: 5px;
+}
+main #orders ul li .order-summary{
+    justify-content: space-between;
+}
+
+main #orders ul li .order-summary tr{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid #000;
+    margin-right: 30px;
+    padding-right: 30px;
+}
+main #orders ul li .order-summary tr:last-child{
+    border: none;
+}
+
+#orders button{
+    margin-top: 0;
+    outline: 1px solid #000;
+    padding: 15px 40px;
+    border-radius: 5px;
+    color: #000;
+    transition: background-color 0.3s;
+}
+#orders button::before{
+    opacity: 0;
+}
+#orders button:hover{
+    background-color: #000;
+    color: #fff;
+    outline: none;
+}
+
+
+/* -------------------------
+    Order Details
+  -------------------------*/
+.order-detail{
+    text-align: left;
+}
+.order-detail table tr{
+    margin-bottom: 10px;
+    display: flex;
+}
+.order-detail table tr:last-child{
+    margin-bottom: 0;
+}
+.order-detail table th{
+    margin-right: 10px;
+    display: inline-block;
+}
+.order-detail hr{
+    margin: 40px 0;
+}
+.order-detail figure{
+    max-width: 150px;
+}
+.order-detail ol li{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.order-detail table{
+    margin-bottom: 40px;
+}
+.order-detail .order-text{
+    display: flex;
+    gap: 20px;
+}
+.order-address tr{
+    flex-direction: column;
+}
+
+
+
+@media (max-width: 768px) {
+    #myaccount{
+        flex-direction: column;
+        gap: 40px;
+        margin: 40px 25px;
+        padding: 0;
+    }
+    #myaccount aside{
+        text-align: center;
+    }
+    aside nav ul{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+    main #orders h3{
+        font-size: 24px;
+    }
+    aside nav ul li{
+        padding: 15px 0;
+        width: 50%;
+    }
+    main #orders ul li{
+        padding: 25px;
+    }
+    main #orders ul li .order-summary{
+        flex-direction: column;
+    }
+    main #orders ul li .order-summary table{
+        margin-bottom: 20px;
+    }
+    main #orders ul li .order-summary tbody{
+        flex-direction: column;
+    }
+    main #orders ul li .order-summary tr{
+        flex-direction: row;
+        border-right: none
+    }
+    main #orders ul li .order-summary tr th{
+        margin-right: 10px;
+    }
+    main #orders ul li .order-thum img{
+        margin-right: 10px;
+    }
+
+    /* -------------------------
+        Order Details
+    -------------------------*/
+    .order-detail ol li {
+        gap: 10px;
+        margin-bottom: 20px;
+        flex-direction: row;
+    }
+    .order-detail table {
+        margin-bottom: 20px;
+    }
+    .order-detail hr {
+        margin: 25px 0;
+    }
+    .order-detail .order-text{
+        gap: 5px;
+        flex-direction: column;
+    }
+}
