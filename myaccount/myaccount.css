@@ -36,7 +36,6 @@
     color: #C30A0A;
 }
 
-
 /* aside */
 aside .welcome{
     font-size: 21px;
@@ -53,6 +52,8 @@ aside nav ul li:hover{
     background-color: #F0EFEA;
     border-radius: 5px;
 }
+
+/* main */
 main #orders ul li{
     border: 1px solid #000;
     padding: 40px;
@@ -60,10 +61,25 @@ main #orders ul li{
 main #orders ul li:not(:last-child){
     margin-bottom: 20px;
 }
-main #orders h3{
+main h3{
     font-size: 32px;
     font-weight: 400;
     margin-bottom: 20px;
+}
+main h4{
+    font-size: 21px;
+    font-weight: 400;
+    margin-bottom: 20px; 
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+}
+main h4:after{
+    content: '';
+    flex-grow: 1;
+    height: 1px;
+    background: #000;
+    margin-left: 30px;
 }
 main #orders ul li .order-thum, main #orders ul li .order-summary, main #orders ul li .order-summary tbody{
     display: flex;
@@ -92,18 +108,21 @@ main #orders ul li .order-summary tr:last-child{
     border: none;
 }
 
-#orders button{
+#myaccount #orders button{
     margin-top: 0;
     outline: 1px solid #000;
     padding: 15px 40px;
     border-radius: 5px;
     color: #000;
+    background-color: #fff;
     transition: background-color 0.3s;
+    font-size: 16px;
+    width: inherit;    
 }
-#orders button::before{
+#myaccount #orders button::before{
     opacity: 0;
 }
-#orders button:hover{
+#myaccount #orders button:hover{
     background-color: #000;
     color: #fff;
     outline: none;
@@ -150,6 +169,120 @@ main #orders ul li .order-summary tr:last-child{
     flex-direction: column;
 }
 
+/* -------------------------
+    Account Details
+  -------------------------*/
+/* Form styles */
+#myaccount fieldset {
+    margin-bottom: 30px;
+    border: none;
+}
+
+#myaccount label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#myaccount input, #myaccount textarea, #myaccount button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+    background-color: #F7F7F7;
+}
+
+#myaccount button {
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+#myaccount button:hover {
+    background-color: #C30A0A;
+}
+
+#myaccount .error-message {
+    display: none;
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+#myaccount .mandatory{
+    color: red;
+}
+
+#myaccount .remenberme{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+#myaccount .remenberme input{
+    width: inherit;
+    margin-right: 10px;
+}
+#myaccount .submit_button button{
+    max-width: 400px;
+    margin: 20px 0 0 0;
+}
+#myaccount .submit_button button:nth-of-type(2){
+    background-color: #fff;
+    color: #000;
+    outline: 2px solid #000;
+    outline-offset: -2px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+#myaccount .submit_button button:nth-of-type(2):hover{
+    background-color: #C30A0A;
+    color: #fff;
+    outline: none;
+}
+#myaccount button::before{
+    opacity: 0;
+}
+
+.password-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-field input {
+    flex: 1;
+    padding-right: 40px; 
+}
+
+.password-toggle-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.password-toggle-icon img {
+    width: 20px;
+    height: 20px;
+}
+
+/* -------------------------
+    Billing Details
+  -------------------------*/
+
+#addressLine1{
+    margin-bottom: 10px;
+}
+select#country,select#state{
+    width: 100%;
+    padding: 10px;
+}
+
 
 
 @media (max-width: 768px) {
@@ -167,7 +300,7 @@ main #orders ul li .order-summary tr:last-child{
         flex-wrap: wrap;
         justify-content: space-evenly;
     }
-    main #orders h3{
+    main h3{
         font-size: 24px;
     }
     aside nav ul li{
@@ -215,4 +348,15 @@ main #orders ul li .order-summary tr:last-child{
         gap: 5px;
         flex-direction: column;
     }
+
+    /* -------------------------
+        Account Details
+    -------------------------*/
+    #myaccount fieldset {
+        margin-bottom: 20px;
+    }
+    main h4:after{
+        margin-left: 20px;
+    }
+
 }

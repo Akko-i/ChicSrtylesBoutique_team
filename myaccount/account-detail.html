@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Details - Chic Style Boutique</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="myaccount.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <script src="../script.js"></script>
+    <script src="myaccount.js"></script>
+</head>
+<body>
+
+    <header id="header_fix">
+        <div class="container">
+            <!-- Hamburger menu (SP only) -->
+            <button class="hamburger" id="hamburgerBtn">
+                <span></span>
+                <span></span>
+            </button>
+    
+            <!-- Navigation -->
+            <nav id="mainNav">
+                <ul class="main-menu">
+                    <li class="dropdown">
+                        <a href="../shop/index.html">Shop</a>
+                        <ul class="submenu" id="submenu">
+                            <li><a href="../shop/newarrivals.html">New Arrivals →</a></li>
+                            <li><a href="../shop/collection.html">Latest Collection →</a></li>
+                            <li><a href="../shop/dresses.html">Dresses →</a></li>
+                            <li><a href="../shop/accessories.html">Accessories →</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../lookbook/index.html">Look Book</a></li>
+                    <li><a href="../blogs/index.html">Blogs</a></li>
+                </ul>
+            </nav>
+    
+            <!-- Logo -->
+            <h1><a href="../index.html"><img src="../img/header/logo.png" alt="Chic Styles Boutique" title="Chic Styles Boutique"></a></h1>
+    
+            <!-- Icons -->
+            <ul class="header-icons">
+                <li><a href="#"><img src="../img/header/icon-mypage.png" alt="My Page" title="My Page"></a></li>
+                <li><a href="#"><img src="../img/header/icon-cart.png" alt="Cart" title="Cart"></a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- background-overlay -->
+    <div id="overlay"></div>
+
+    <!-- breadcrumbs -->
+    <nav class="breadcrumbs">
+        <ol>
+            <li><a href="../index.html">Home</a></li>
+            <li>My Account</li>
+        </ol>
+
+        <h2>My Account</h2>
+    </nav>
+
+
+    <div id="myaccount">
+
+        <!-- Left -->
+        <aside>
+            <p class="welcome">Welcome, ◯◯◯!</p>
+            <hr>
+            <nav>
+                <ul>
+                    <li><a href="orders.html">Orders →</a></li>
+                    <li><a href="account-detail.html">Account Details →</a></li>
+                    <li><a href="billing-detail.html">Billing Details →</a></li>
+                    <li><a href="../login/index.html">Log out →</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+
+        <!-- Right -->
+        <main>
+
+            <section id="account-detail">
+                <h3>Account Details</h3>
+
+                <form action="#" id="contactForm" onsubmit="return validateContactForm()" novalidate>
+                    <!-- First Name -->
+                    <fieldset>
+                        <label for="firstName">First Name <span class="mandatory">*</span></label>
+                        <input type="text" id="firstName" name="firstName" autocomplete="given-name" required placeholder="Enter your first name">
+                        <span class="error-message" id="firstNameError">Please enter your first name.</span>
+                    </fieldset>
+                    
+                    <!-- Last Name -->
+                    <fieldset>
+                        <label for="lastName">Last Name <span class="mandatory">*</span></label>
+                        <input type="text" id="lastName" name="lastName" autocomplete="family-name" required placeholder="Enter your last name">
+                        <span class="error-message" id="lastNameError">Please enter your last name.</span>
+                    </fieldset>
+                    
+                    <!-- Email Address -->
+                    <fieldset>
+                        <label for="email">Email Address <span class="mandatory">*</span></label>
+                        <input type="email" id="email" name="email" autocomplete="email" required placeholder="Enter your email address">
+                        <span class="error-message" id="emailError">Please enter a valid email address.</span>
+                    </fieldset>
+                    
+                    <h4>Password Change</h4>
+                
+                    <!-- Current Password -->
+                    <fieldset>
+                        <label for="currentPassword">Current Password <span class="mandatory">*</span></label>
+                        <div class="password-field">
+                            <input type="password" id="currentPassword" name="currentPassword" autocomplete="current-password" required placeholder="Enter your Current Password">
+                            <span class="password-toggle-icon">
+                                <img src="../img/login/icon_eye-open.svg" alt="Toggle password visibility">
+                            </span>
+                        </div>
+                        <span class="error-message" id="currentPasswordError">Please enter your current password.</span>
+                    </fieldset>
+
+                    <!-- New Password -->
+                    <fieldset>
+                        <label for="newPassword">New Password <span class="mandatory">*</span></label>
+                        <div class="password-field">
+                            <input type="password" id="newPassword" name="newPassword" autocomplete="new-password" required placeholder="Enter your New Password">
+                            <span class="password-toggle-icon">
+                                <img src="../img/login/icon_eye-open.svg" alt="Toggle password visibility">
+                            </span>
+                        </div>
+                        <span class="error-message" id="newPasswordError">Please enter your new password.</span>
+                    </fieldset>
+
+                    <!-- Confirm New Password -->
+                    <fieldset>
+                        <label for="confirmNewPassword">Confirm New Password <span class="mandatory">*</span></label>
+                        <div class="password-field">
+                            <input type="password" id="confirmNewPassword" name="confirmNewPassword" autocomplete="new-password" required placeholder="Confirm your New Password">
+                            <span class="password-toggle-icon">
+                                <img src="../img/login/icon_eye-open.svg" alt="Toggle password visibility">
+                            </span>
+                        </div>
+                        <span class="error-message" id="confirmNewPasswordError">Passwords do not match.</span>
+                    </fieldset>
+                
+                    <!-- Submit Button -->
+                    <div class="submit_button">
+                        <button type="submit">Update Account</button>
+                    </div>
+                </form>
+
+            </section>
+        
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer_flex">
+                <div class="footer_flex2">
+                    <ul>
+                        <li><a href="../shop/index.html">Shop</a></li>
+                        <li><a href="../lookbook/index.html">Look Book</a></li>
+                        <li><a href="../blogs/index.html">Blogs</a></li>
+                    </ul>
+                    <ul>  
+                        <li><a href="../contactus/index.html">Contact Us</a></li>
+                        <li><a href="../aboutus/index.html">About Us</a></li>
+                        <li><a href="../privacypolicy/index.html">Privacy Policy</a></li>
+                        <li><a href="../termsofuse/index.html">Terms of Use</a></li>
+                    </ul>
+                </div>
+                <ul class="sns_icon">
+                    <li><a href="https://www.instagram.com/" target="_blank"><img src="../img/footer/icon-insta.png" alt="Instagram"></a></li>
+                    <li><a href="https://www.facebook.com/" target="_blank"><img src="../img/footer/icon-fb.png" alt="Facebook"></a></li>
+                </ul>
+            </div>
+            <small>©2024 All Rights Reserved</small>
+        </div>
+    </footer>
+
+
+</body>
+</html>
