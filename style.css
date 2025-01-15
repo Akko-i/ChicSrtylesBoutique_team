@@ -21,6 +21,13 @@ a {
     text-decoration: none;
     color: inherit;
 }
+
+#login a:hover, 
+.createaccount a:hover {
+    color: #C30A0A !important; /* Matches the button's color */
+    transition: color 0.3s ease;
+}
+
 button {
     background: none;
     border: none;
@@ -200,6 +207,57 @@ header nav, header .header-icons{
     width: 60%;
     margin: auto;
 }
+
+/* User icon and dropdown menu styles */
+#userIconContainer {
+    position: relative;
+}
+
+#userMenu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 40px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 100;
+    text-align: left;
+    width: 200px;
+}
+
+#userMenu.active {
+    display: block;
+}
+
+#userMenu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#userMenu ul li {
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#userMenu ul li:hover {
+    background-color: #f0f0f0;
+}
+
+#userMenu ul li a {
+    color: #000;
+    text-decoration: none;
+    display: block;
+}
+
+#userMenu ul li a:hover {
+    text-decoration: underline;
+}
+
+
 
 /* background overlay */
 #overlay {

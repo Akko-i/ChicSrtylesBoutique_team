@@ -13,38 +13,10 @@
 
     <header id="header_fix">
         <div class="container">
-
-            <!-- Hamburger menu (SP only) -->
-            <button class="hamburger" id="hamburgerBtn">
-                <span></span>
-                <span></span>
-            </button>
-    
-            <!-- Navigation -->
-            <nav id="mainNav">
-                <ul class="main-menu">
-                    <li class="dropdown">
-                        <a href="../shop/index.html">Shop</a>
-                        <ul class="submenu" id="submenu">
-                            <li><a href="../shop/newarrivals.html">New Arrivals →</a></li>
-                            <li><a href="../shop/collection.html">Latest Collection →</a></li>
-                            <li><a href="../shop/dresses.html">Dresses →</a></li>
-                            <li><a href="../shop/accessories.html">Accessories →</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="../lookbook/index.html">Look Book</a></li>
-                    <li><a href="../blogs/index.html">Blogs</a></li>
-                </ul>
-            </nav>
-    
+               
             <!-- Logo -->
-            <h1><a href="../index.html"><img src="../img/header/logo.png" alt="Chic Styles Boutique" title="Chic Styles Boutique"></a></h1>
+            <h1 style="margin: 20px auto;"><a href="../index.php"><img src="../img/header/logo.png" alt="Chic Styles Boutique" title="Chic Styles Boutique"></a></h1>
     
-            <!-- Icons -->
-            <ul class="header-icons">
-                <li><a href="#"><img src="../img/header/icon-mypage.png" alt="My Page" title="My Page"></a></li>
-                <li><a href="#"><img src="../img/header/icon-cart.png" alt="Cart" title="Cart"></a></li>
-            </ul>
         </div>
     </header>
 
@@ -57,7 +29,7 @@
         <!-- breadcrumbs -->
         <nav class="breadcrumbs">
             <ol>
-                <li><a href="../index.html">Home</a></li>
+                <li><a href="../index.php">Home</a></li>
                 <li>Privacy Policy</li>
             </ol>
 
@@ -116,30 +88,7 @@
     </main>
     
 
-    <footer>
-        <div class="container">
-            <div class="footer_flex">
-                <div class="footer_flex2">
-                    <ul>
-                        <li><a href="../shop/index.html">Shop</a></li>
-                        <li><a href="../lookbook/index.html">Look Book</a></li>
-                        <li><a href="../blogs/index.html">Blogs</a></li>
-                    </ul>
-                    <ul>  
-                        <li><a href="../contactus/index.html">Contact Us</a></li>
-                        <li><a href="../aboutus/index.html">About Us</a></li>
-                        <li><a href="../privacypolicy/index.html">Privacy Policy</a></li>
-                        <li><a href="../termsofuse/index.html">Terms of Use</a></li>
-                    </ul>
-                </div>
-                <ul class="sns_icon">
-                    <li><a href="https://www.instagram.com/" target="_blank"><img src="../img/footer/icon-insta.png" alt="Instagram"></a></li>
-                    <li><a href="https://www.facebook.com/" target="_blank"><img src="../img/footer/icon-fb.png" alt="Facebook"></a></li>
-                </ul>
-            </div>
-            <small>©2024 All Rights Reserved</small>
-        </div>
-    </footer>
+    <?php include '../footer.php'; ?>
 
 </body>
 </html>
