@@ -2,7 +2,10 @@
 session_start();
 include 'config.php';
 
-if (isset($_SESSION['user_id'])) {
+// Check if the user is logged in
+$isUserLoggedIn = isset($_SESSION['user_id']);
+
+if ($isUserLoggedIn) {
     include 'login/db_connection.php';
 
     try {
@@ -18,7 +21,10 @@ if (isset($_SESSION['user_id'])) {
             $_SESSION['user_first_name'] = $user['user_first_name'];
             $_SESSION['user_last_name'] = $user['user_last_name'];
         } else {
-            error_log("User data not found in database.");
+            // Clear session if user data is not found
+            session_unset();
+            session_destroy();
+            $isUserLoggedIn = false;
         }
 
         $stmt->close();
@@ -27,24 +33,6 @@ if (isset($_SESSION['user_id'])) {
     }
 }
 ?>
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const userIconName = document.getElementById("userIconName");
-        if (userIconName) {
-            console.log("Header loaded with user name:", userIconName.textContent);
-        } else {
-            console.error("Header userIconName span not found in DOM. Retrying...");
-            setTimeout(() => {
-                const retriedUserIconName = document.getElementById("userIconName");
-                if (retriedUserIconName) {
-                    console.log("User name found after retry:", retriedUserIconName.textContent);
-                } else {
-                    console.error("Retry failed. userIconName not found.");
-                }
-            }, 1000);
-        }
-    });
-</script>
 
 <head>
     <meta name="base-url" content="<?php echo BASE_URL; ?>">
@@ -86,13 +74,13 @@ if (isset($_SESSION['user_id'])) {
             <li id="userIconContainer">
                 <img src="<?php echo BASE_URL; ?>img/header/icon-mypage.png" alt="User" id="userIcon">
                 <div id="userMenu" class="user-menu">
-                    <?php if (isset($_SESSION['user_id'])): ?>
+                    <?php if ($isUserLoggedIn && isset($_SESSION['user_first_name'], $_SESSION['user_last_name'])): ?>
                         <ul>
                             <li><span id="userIconName" style="font-weight: bold;">
                                 <?php echo htmlspecialchars($_SESSION['user_first_name'] . ' ' . $_SESSION['user_last_name']); ?>
                             </span></li>
                             <li><a href="<?php echo BASE_URL; ?>myaccount/account-detail.php">Account Settings</a></li>
-                            <li><a href="<?php echo BASE_URL; ?>logout.php">Log Out</a></li>
+                            <li id="logoutBtn"><a href="#">Log Out</a></li>
                         </ul>
                     <?php else: ?>
                         <ul>
@@ -102,7 +90,7 @@ if (isset($_SESSION['user_id'])) {
                     <?php endif; ?>
                 </div>
             </li>
-            <li><a href="#"><img src="<?php echo BASE_URL; ?>img/header/icon-cart.png" alt="Cart"></a></li>
+            <li><a href="<?php echo BASE_URL; ?>cart/index.php"><img src="<?php echo BASE_URL; ?>img/header/icon-cart.png" alt="Cart"></a></li>
         </ul>
     </div>
 </header>

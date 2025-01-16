@@ -8,10 +8,13 @@
     <link rel="stylesheet" href="myaccount.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="myaccount.js"></script>
+    <script src="../script.js"></script>
 </head>
 
 <?php
 include '../config.php';
+include '../header.php'; 
 include '../login/db_connection.php';
 
 if (session_status() === PHP_SESSION_NONE) {
@@ -45,15 +48,16 @@ if ($stmt) {
 
 <body data-base-url="<?php echo BASE_URL; ?>">
 
-<header id="header_fix">
-    <div class="container">
-        <h1 style="margin: 20px auto;">
-            <a href="../index.php">
-                <img src="../img/header/logo.png" alt="Chic Styles Boutique" title="Chic Styles Boutique">
-            </a>
-        </h1>
-    </div>
-</header>
+
+<!-- breadcrumbs -->
+<nav class="breadcrumbs">
+    <ol>
+        <li><a href="../index.php">Home</a></li>
+        <li>My Account</li>
+    </ol>
+
+    <h2>My Account</h2>
+</nav>
 
 <div id="myaccount">
     <!-- Left Sidebar -->
@@ -62,10 +66,9 @@ if ($stmt) {
         <hr>
         <nav>
             <ul>
-                <li><a href="orders.php">Orders →</a></li>
                 <li><a href="account-detail.php">Account Details →</a></li>
                 <li><a href="billing-detail.php">Billing Details →</a></li>
-                <li><a href="../login/index.php">Log out →</a></li>
+                <li><a href="#" id="logoutLink">Log out →</a></li>
             </ul>
         </nav>
     </aside>
@@ -105,7 +108,7 @@ if ($stmt) {
             <!-- Password Change Form -->
             <h4>Password Change</h4>
             <form id="passwordForm" method="POST" novalidate>
-                <fieldset>
+            <fieldset>
                     <label for="currentPassword">Current Password <span class="mandatory">*</span></label>
                     <div class="password-field">
                         <input type="password" id="currentPassword" name="currentPassword" required>
@@ -114,7 +117,7 @@ if ($stmt) {
                             <img src="../img/login/icon_eye-close.svg" alt="Hide password" class="eye-closed" style="display: none;">
                         </span>
                     </div>
-                    <span class="error-message" id="currentPasswordError"></span>
+                    <div id="currentPasswordError" class="error-message" style="display: none;"></div>
                 </fieldset>
 
                 <fieldset>
@@ -126,7 +129,7 @@ if ($stmt) {
                             <img src="../img/login/icon_eye-close.svg" alt="Hide password" class="eye-closed" style="display: none;">
                         </span>
                     </div>
-                    <span class="error-message" id="newPasswordError">Password must include uppercase, lowercase, a number, and a special character.</span>
+                    <div id="newPasswordError" class="error-message" style="display: none;"></div>
                 </fieldset>
 
                 <fieldset>
@@ -138,7 +141,7 @@ if ($stmt) {
                             <img src="../img/login/icon_eye-close.svg" alt="Hide password" class="eye-closed" style="display: none;">
                         </span>
                     </div>
-                    <span class="error-message" id="confirmNewPasswordError">Passwords do not match.</span>
+                    <div id="confirmNewPasswordError" class="error-message" style="display: none;"></div>
                 </fieldset>
 
                 <button type="button" id="changePasswordButton">Change Password</button>
@@ -149,6 +152,11 @@ if ($stmt) {
 </div>
 
 <?php include '../footer.php'; ?>
+
+
+
+</body>
+
 
 <script>
     function togglePasswordVisibility(fieldId, toggleElement) {
@@ -207,77 +215,86 @@ if ($stmt) {
 
     // Change Password Logic
     document.getElementById("changePasswordButton").addEventListener("click", function () {
-    const currentPassword = document.getElementById("currentPassword").value.trim();
-    const newPassword = document.getElementById("newPassword").value.trim();
-    const confirmNewPassword = document.getElementById("confirmNewPassword").value.trim();
+        const currentPassword = document.getElementById("currentPassword").value.trim();
+        const newPassword = document.getElementById("newPassword").value.trim();
+        const confirmNewPassword = document.getElementById("confirmNewPassword").value.trim();
 
-    let isValid = true;
+        const currentPasswordError = document.getElementById("currentPasswordError");
+        const newPasswordError = document.getElementById("newPasswordError");
+        const confirmNewPasswordError = document.getElementById("confirmNewPasswordError");
 
-    // Reset error messages
-    document.getElementById("currentPasswordError").textContent = "";
-    document.getElementById("newPasswordError").textContent = "";
-    document.getElementById("confirmNewPasswordError").textContent = "";
+        // Reset error messages
+        currentPasswordError.style.display = "none";
+        newPasswordError.style.display = "none";
+        confirmNewPasswordError.style.display = "none";
 
-    console.log("Change Password button clicked.");
-    console.log("Current Password:", currentPassword);
-    console.log("New Password:", newPassword);
-    console.log("Confirm New Password:", confirmNewPassword);
+        let isValid = true;
 
-    // Validate current password
-    if (!currentPassword) {
-        document.getElementById("currentPasswordError").textContent = "Current password is required.";
-        isValid = false;
-    }
-
-    // Validate new password complexity
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&\-_=+,.<>?:;#^])[A-Za-z\d@$!%*?&\-_=+,.<>?:;#^]{8,}$/;
-    if (!passwordRegex.test(newPassword)) {
-        document.getElementById("newPasswordError").textContent = "Password must include uppercase, lowercase, a number, and a special character.";
-        isValid = false;
-    }
-
-    // Validate confirm new password
-    if (newPassword !== confirmNewPassword) {
-        document.getElementById("confirmNewPasswordError").textContent = "Passwords do not match.";
-        isValid = false;
-    }
-
-    // If validation fails, stop the process
-    if (!isValid) {
-        console.log("Validation failed. Fix errors and try again.");
-        return;
-    }
-
-    console.log("Validation passed. Sending AJAX request...");
-
-    // AJAX Request to update password
-    $.ajax({
-        url: "update_password.php",
-        method: "POST",
-        dataType: "json",
-        data: {
-            currentPassword: currentPassword,
-            newPassword: newPassword
-        },
-        success: function (response) {
-            console.log("Response from server:", response);
-            if (response.success) {
-                alert(response.message || "Password changed successfully.");
-                document.getElementById("passwordForm").reset(); // Reset the form
-            } else {
-                document.getElementById("currentPasswordError").textContent = response.message || "Current password is incorrect.";
-            }
-        },
-        error: function (xhr) {
-            console.error("AJAX request failed:", xhr);
-            const errorMessage = xhr.responseJSON?.message || "An error occurred.";
-            document.getElementById("currentPasswordError").textContent = errorMessage;
+        // Validate current password
+        if (!currentPassword) {
+            currentPasswordError.textContent = "Current password is required.";
+            currentPasswordError.style.display = "block";
+            isValid = false;
         }
+
+        // Validate new password complexity
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&\-_=+,.<>?:;#^])[A-Za-z\d@$!%*?&\-_=+,.<>?:;#^]{8,}$/;
+        if (!passwordRegex.test(newPassword)) {
+            newPasswordError.textContent =
+                "Password must include uppercase, lowercase, a number, and a special character.";
+            newPasswordError.style.display = "block";
+            isValid = false;
+        }
+
+        // Validate confirm new password
+        if (newPassword !== confirmNewPassword) {
+            confirmNewPasswordError.textContent = "Passwords do not match.";
+            confirmNewPasswordError.style.display = "block";
+            isValid = false;
+        }
+
+        // If validation fails, stop the process
+        if (!isValid) {
+            console.log("Validation failed. Fix errors and try again.");
+            return;
+        }
+
+        console.log("Validation passed. Preparing to send AJAX request...");
+
+        // AJAX Request to update password
+        $.ajax({
+            url: "update_password.php",
+            method: "POST",
+            dataType: "json",
+            data: {
+                currentPassword: currentPassword,
+                newPassword: newPassword
+            },
+            beforeSend: function () {
+                console.log("Sending AJAX request to update_password.php...");
+            },
+            success: function (response) {
+                console.log("Response from server:", response);
+                if (response.success) {
+                    alert(response.message || "Password changed successfully.");
+                    document.getElementById("passwordForm").reset(); // Reset the form
+                } else {
+                    // Display backend error message for incorrect current password
+                    currentPasswordError.textContent =
+                        response.message || "Current password is incorrect.";
+                    currentPasswordError.style.display = "block";
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("AJAX request failed. Status:", status, "Error:", error);
+                const errorMessage = xhr.responseJSON?.message || "An error occurred.";
+                currentPasswordError.textContent = errorMessage;
+                currentPasswordError.style.display = "block";
+            }
+        });
     });
-});
 
 
 </script>
 
-</body>
 </html>

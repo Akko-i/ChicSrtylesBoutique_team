@@ -208,29 +208,35 @@ header nav, header .header-icons{
     margin: auto;
 }
 
+
+
 /* User icon and dropdown menu styles */
+/* User icon container */
 #userIconContainer {
     position: relative;
 }
 
+/* User menu styles */
 #userMenu {
-    display: none;
+    display: none; /* Default: hidden */
     position: absolute;
     right: 0;
     top: 40px;
-    background-color: #fff;
+    background: white;
+    border: 1px solid #ddd;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    overflow: hidden;
-    z-index: 100;
-    text-align: left;
+    border-radius: 4px;
+    z-index: 1000;
     width: 200px;
+    overflow: hidden;
 }
 
+/* Show menu when the "active" class is added */
 #userMenu.active {
-    display: block;
+    display: block; /* Makes the menu visible */
 }
 
+/* User menu list styles */
 #userMenu ul {
     list-style: none;
     margin: 0;
@@ -239,17 +245,17 @@ header nav, header .header-icons{
 
 #userMenu ul li {
     padding: 10px 20px;
-    cursor: pointer;
     font-size: 14px;
+    cursor: pointer;
 }
 
 #userMenu ul li:hover {
-    background-color: #f0f0f0;
+    background-color: #f0f0f0; /* Highlight on hover */
 }
 
 #userMenu ul li a {
-    color: #000;
     text-decoration: none;
+    color: #000;
     display: block;
 }
 

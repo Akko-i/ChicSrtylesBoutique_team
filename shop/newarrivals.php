@@ -24,8 +24,8 @@
         <!-- breadcrumbs -->
         <nav class="breadcrumbs">
             <ol>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="index.html">Shop</a></li>
+                <li><a href="../index.php">Home</a></li>
+                <li><a href="index.php">Shop</a></li>
                 <li>New Arrivals</li>
             </ol>
 

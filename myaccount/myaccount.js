@@ -1,84 +1,3 @@
-
-// Form validation
-function validateContactForm() {
-    let isValid = true;
-
-    const firstName = document.getElementById('firstName');
-    const lastName = document.getElementById('lastName');
-    const email = document.getElementById('email');
-    const currentPassword = document.getElementById('currentPassword');
-    const newPassword = document.getElementById('newPassword');
-    const confirmNewPassword = document.getElementById('confirmNewPassword');
-
-    if (!firstName.value.trim()) {
-        document.getElementById('firstNameError').style.display = 'block';
-        isValid = false;
-    } else {
-        document.getElementById('firstNameError').style.display = 'none';
-    }
-
-    if (!lastName.value.trim()) {
-        document.getElementById('lastNameError').style.display = 'block';
-        isValid = false;
-    } else {
-        document.getElementById('lastNameError').style.display = 'none';
-    }
-
-    if (!email.value.trim() || !/\S+@\S+\.\S+/.test(email.value)) {
-        document.getElementById('emailError').style.display = 'block';
-        isValid = false;
-    } else {
-        document.getElementById('emailError').style.display = 'none';
-    }
-
-    if (!currentPassword.value.trim()) {
-        document.getElementById('currentPasswordError').style.display = 'block';
-        isValid = false;
-    } else {
-        document.getElementById('currentPasswordError').style.display = 'none';
-    }
-
-    if (!newPassword.value.trim() || newPassword.value.length < 6) {
-        document.getElementById('newPasswordError').style.display = 'block';
-        isValid = false;
-    } else {
-        document.getElementById('newPasswordError').style.display = 'none';
-    }
-
-    if (confirmNewPassword.value !== newPassword.value) {
-        document.getElementById('confirmNewPasswordError').style.display = 'block';
-        isValid = false;
-    } else {
-        document.getElementById('confirmNewPasswordError').style.display = 'none';
-    }
-
-    return isValid;
-}
-
-
-// Password visibility toggle
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.password-toggle-icon').forEach(icon => {
-        icon.addEventListener('click', function () {
-            const passwordField = this.previousElementSibling;
-            const iconImage = this.querySelector('img');
-
-            if (passwordField && iconImage) {
-                if (passwordField.type === 'password') {
-                    passwordField.type = 'text';
-                    iconImage.src = '../img/login/icon_eye-close.svg'; // Change to eye-close icon
-                } else {
-                    passwordField.type = 'password'; // Hide the password
-                    iconImage.src = '../img/login/icon_eye-open.svg'; // Change to eye-open icon
-                }
-            } else {
-                console.error("Password field or toggle icon not found.");
-            }
-        });
-    });
-});
-
-
 // Billing address page
 function validateBillingForm() {
     let isValid = true;
@@ -112,3 +31,32 @@ function validateBillingForm() {
 }
 
 
+document.addEventListener("DOMContentLoaded", () => {
+    const logoutLink = document.getElementById("logoutLink");
+
+    if (logoutLink) {
+        logoutLink.addEventListener("click", (e) => {
+            e.preventDefault(); // Prevent the default link behavior
+            performLogout();
+        });
+    }
+
+    function performLogout() {
+        fetch('../logout.php', {
+            method: 'POST',
+        })
+            .then((response) => {
+                if (response.ok) {
+                    // Redirect to the login page after logout
+                    window.location.href = '../login/index.php';
+                } else {
+                    console.error("Logout failed. Response status:", response.status);
+                    alert("An error occurred during logout. Please try again.");
+                }
+            })
+            .catch((error) => {
+                console.error("Logout request failed:", error);
+                alert("An error occurred during logout. Please check your network connection.");
+            });
+    }
+});
