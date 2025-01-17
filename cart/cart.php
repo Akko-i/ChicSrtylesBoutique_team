@@ -105,7 +105,7 @@
         
             <div class="cart-buttons">
                 <button class="continue-shopping" type="button" onclick="location.href='../index.html'">← Continue Shopping</button>
-                <button class="proceed-to-checkout" type="button" onclick="location.href='checkout.html'">Proceed to checkout →</button>
+                <button class="proceed-to-checkout" type="button" onclick="location.href='checkout.php'">Proceed to checkout →</button>
             </div>
         </section>
             
