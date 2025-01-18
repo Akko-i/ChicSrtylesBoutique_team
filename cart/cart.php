@@ -1,5 +1,13 @@
 <?php 
-    require_once "cart_db.php";
+    require_once "cart_db_connect.php";
+
+    if ($_POST) {
+        // Insert products into cart item
+        $stmt = $conn->prepare("INSERT INTO CartItems (UserID, ProductID, ProductAmount) VALUES (?, ?, ?);");
+        $stmt->execute(['1', '3', $_POST["amount"]]);
+    }
+
+    require_once "fetch_cart.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -140,3 +148,5 @@
 
 </body>
 </html>
+
+<?php $conn->close(); ?>

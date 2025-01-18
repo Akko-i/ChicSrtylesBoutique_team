@@ -2,7 +2,7 @@
 
 $stripeSecretKey = $_ENV["STRIPE_KEY"];
 require_once 'stripe-php/init.php';
-require_once 'cart_db.php';
+require_once 'cart_db_connect.php';
 
 if ($stripeSecretKey == "") {
     echo "STRIPE SECRET KEY NOT CONFIGURED";
@@ -48,3 +48,5 @@ $checkout_session = \Stripe\Checkout\Session::create([
 
 header("HTTP/1.1 303 See Other");
 header("Location: " . $checkout_session->url);
+
+$conn->close();
