@@ -1,6 +1,6 @@
 <?php
 
-require_once 'secrets.php';
+$stripeSecretKey = $_ENV["STRIPE_KEY"];
 require_once 'stripe-php/init.php';
 require_once 'cart_db.php';
 
