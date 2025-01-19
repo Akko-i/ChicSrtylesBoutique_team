@@ -1,6 +1,6 @@
 <?php
 include '../config.php';
-include '../login/db_connection.php';
+include '../db_connection.php';
 
 // Start the session if it's not already started
 if (session_status() === PHP_SESSION_NONE) {

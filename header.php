@@ -6,7 +6,7 @@ include 'config.php';
 $isUserLoggedIn = isset($_SESSION['user_id']);
 
 if ($isUserLoggedIn) {
-    include 'login/db_connection.php';
+    include 'db_connection.php';
 
     try {
         $userId = $_SESSION['user_id'];

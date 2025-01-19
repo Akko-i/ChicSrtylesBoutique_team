@@ -15,7 +15,7 @@
 <?php
 include '../config.php';
 include '../header.php'; 
-include '../login/db_connection.php';
+include '../db_connection.php';
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();

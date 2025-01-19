@@ -1,5 +1,5 @@
 <?php
-require 'db_connection.php'; // Include database connection
+require '../db_connection.php'; // Include database connection
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Collect data from the form

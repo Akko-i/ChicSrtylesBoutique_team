@@ -4,7 +4,7 @@ header("Content-Type: text/event-stream");
 header("Cache-Control: no-cache");
 header("Connection: keep-alive");
 
-include '../login/db_connection.php';
+include '../db_connection.php';
 
 if (!isset($_SESSION['user_id'])) {
     echo "data: {}\n\n";

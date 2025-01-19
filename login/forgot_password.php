@@ -1,5 +1,5 @@
 <?php
-require 'db_connection.php'; // Include your database connection
+require '../db_connection.php'; // Include your database connection
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email']);

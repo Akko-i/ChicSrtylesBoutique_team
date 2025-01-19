@@ -1,5 +1,5 @@
 <?php
-require '../login/db_connection.php'; // Adjust path as needed
+require '../db_connection.php'; // Adjust path as needed
 
 // Ensure this script is only accessed via POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

@@ -1,6 +1,6 @@
 <?php
 // Include the database connection
-require 'db_connection.php';
+require '../db_connection.php';
 
 session_start();
 

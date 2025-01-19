@@ -3,7 +3,7 @@ ob_start(); // Start output buffering
 header('Content-Type: application/json'); // Set content type to JSON
 
 include '../config.php';
-include '../login/db_connection.php';
+include '../db_connection.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

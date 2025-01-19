@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../login/db_connection.php';
+include '../db_connection.php';
 
 // Path to the file used for SSE updates
 $sseFilePath = __DIR__ . '/sse_data.json';
