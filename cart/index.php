@@ -57,7 +57,7 @@
                             $cart_item_price = $row["ProductPrice"] * $row["ProductAmount"];
                             $total_price += $cart_item_price;
                             echo
-                            '<tr>
+                            '<tr id="product_' . $row["ProductID"] . '">
                                 <td class="product">
                                     <div class="product-info">
                                         <img src="../img/shop/'.$row["ProductImg"].'" alt="' . $row["ProductName"] . '">
@@ -69,7 +69,7 @@
                                 </td>
                                 <td class="quantity">
                                     <input type="number" value="'.$row["ProductAmount"].'" min="1">
-                                    <button class="remove-item"><img src="../img/cart/icon-cross.svg" alt="Remove this product"></button>
+                                    <button class="remove-item" onclick="onRemoveFromCartClicked('. $row["ProductID"] .');"><img src="../img/cart/icon-cross.svg" alt="Remove this product"></button>
                                 </td>
                             </tr>';
                             $row_num++;
