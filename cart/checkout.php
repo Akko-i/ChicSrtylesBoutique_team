@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+$isUserLoggedIn = isset($_SESSION['user_id']);
 $stripeSecretKey = $_ENV["STRIPE_KEY"];
 require_once 'stripe-php/init.php';
 require_once '../db_connection.php';
@@ -32,7 +34,10 @@ while ($row_num < $cart_items_result->num_rows) {
     ]);
     $row_num++;
 }
-// echo print_r($line_items);
+if (!$line_items) {
+  echo "Cart is empty";
+  exit;
+}
                   
 $DOMAIN = "http://" . $_SERVER['SERVER_NAME'] . ":" . $_SERVER['SERVER_PORT'];
 
