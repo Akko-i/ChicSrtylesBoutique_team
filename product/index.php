@@ -1,6 +1,11 @@
 <?php
     require_once "../db_connection.php";
 
+    if ($_SERVER["QUERY_STRING"] == "") {
+        echo "Product ID not set";
+        exit;
+    }
+
     $stmt = $conn->prepare("SELECT * FROM Products WHERE Products.ProductID=" . $_SERVER["QUERY_STRING"]);
     $stmt -> execute();
     $products_result = $stmt->get_result();
@@ -89,8 +94,15 @@
                         </section>
                         
                         <input type="hidden" name="product_id" value="<?php echo $product["ProductID"]; ?>">
+                        
                         <!-- Cart Button -->
-                        <button class="add-to-cart-button">Add to Cart</button>
+                        <?php 
+                        if (!$isUserLoggedIn) {
+                            echo '<p>You must login to add this item to your cart.</p><br><br>';
+                        } else {
+                            echo '<button class="add-to-cart-button">Add to Cart</button>';
+                        }
+                        ?>
                     </form>
                     <!-- Product Description -->
                     <p class="product-description">
