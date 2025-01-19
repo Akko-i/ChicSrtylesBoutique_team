@@ -80,7 +80,7 @@ if ($isUserLoggedIn) {
                                 <?php echo htmlspecialchars($_SESSION['user_first_name'] . ' ' . $_SESSION['user_last_name']); ?>
                             </span></li>
                             <li><a href="<?php echo BASE_URL; ?>myaccount/account-detail.php">Account Settings</a></li>
-                            <li id="logoutBtn"><a href="#">Log Out</a></li>
+                            <li id="logoutBtn"><a href="<?php echo BASE_URL; ?>logout.php">Log Out</a></li>
                         </ul>
                     <?php else: ?>
                         <ul>
