@@ -1,21 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // Database of products
-    const products = [
-        // Dresses (new to old)
-        { id: 'DR8', name: "White cotton dress", image: "../img/shop/DR8.png", price: 120.00, date: "2024-08-01", link: "../product/DR8.html" },
-        { id: 'DR7', name: "Earth Tone Maxi Dress", image: "../img/shop/DR7.png", price: 100.00, date: "2024-07-20", link: "../product/DR7.html" },
-        { id: 'DR6', name: "Silky White dress", image: "../img/shop/DR6.png", price: 80.00, date: "2024-06-25", link: "../product/DR6.html" },
-        { id: 'DR5', name: "Tropical flowy dress", image: "../img/shop/DR5.png", price: 110.00, date: "2024-05-05", link: "../product/DR5.html" },
-        { id: 'DR4', name: "Black mini dress", image: "../img/shop/DR4.png", price: 80.00, date: "2024-04-05", link: "../product/DR4.html" },
-        { id: 'DR3', name: "Black slit dress", image: "../img/shop/DR3.png", price: 100.00, date: "2024-03-05", link: "../product/DR3.html" },
-        { id: 'DR2', name: "Feminine dots dress", image: "../img/shop/DR2.png", price: 90.00, date: "2024-02-05", link: "../product/DR2.html" },
-        { id: 'DR1', name: "Navy long dress", image: "../img/shop/DR1.png", price: 110.00, date: "2024-01-05", link: "../product/DR1.html" }
-    ];
+    let products = [];
+    fetch("fetch_products.php").then(function(response) {
+        return response.json();
+    }).then(function(data) {
+        products = data;
+        // Initial render with "newest" as default
+        sortProducts('newest');
+        numShowing.innerText = "Showing " + products.length + " results";
+    });
     
 
     const productList = document.getElementById('product-list');
     const sortDropdown = document.getElementById('sort');
+    const numShowing = document.getElementById('num_showing');
 
     // Insert element into HTML
     function renderProducts(products) {
@@ -25,15 +24,15 @@ document.addEventListener('DOMContentLoaded', () => {
             productItem.className = 'product-item';
             productItem.innerHTML = `
                 <figure class="product-figure">
-                    <div><a href="${product.link}" class="product-link">
-                        <img src="${product.image}" alt="${product.name}">
+                    <div><a href="../product?${product.ProductID}" class="product-link">
+                        <img src="../img/shop/${product.ProductImg}" alt="${product.ProductName}">
                     </a></div>
                     <figcaption>
-                        <h3>${product.name}</h3>
-                        <p>AUD ${product.price.toFixed(2)}</p>
+                        <h3>${product.ProductName}</h3>
+                        <p>AUD ${product.ProductPrice.toFixed(2)}</p>
                     </figcaption>
                 </figure>
-                <button class="view-detail-button" onclick="window.location.href='${product.link}'">View Detail</button>
+                <button class="view-detail-button" onclick="window.location.href='../product?${product.ProductID}'">View Detail</button>
             `;
             productList.appendChild(productItem);
         });
@@ -54,9 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         renderProducts(sortedProducts);
     }
-
-    // Initial render with "newest" as default
-    sortProducts('newest');
 
     // sort when changing dropdown menu
     sortDropdown.addEventListener('change', (e) => {

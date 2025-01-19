@@ -1,18 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // Database of products
-    const products = [
-        // Dresses (new to old)
-        { id: 'DR8', name: "White cotton dress", image: "../img/shop/DR8.png", price: 120.00, date: "2024-08-01", link: "../product/DR8.html" },
-    
-        // Accessories (new to old)
-        { id: 'AC8', name: "Double ring necklace", image: "../img/shop/AC8.png", price: 120.00, date: "2024-09-01", link: "../product/AC8.html" },
-        { id: 'AC7', name: "Marble round earrings", image: "../img/shop/AC7.png", price: 100.00, date: "2024-08-20", link: "../product/AC7.html" },  
-    ];
-    
+    let products = [];
+    fetch("fetch_products.php").then(function(response) {
+        return response.json();
+    }).then(function(data) {
+        products = data;
+        // Initial render with "newest" as default
+        sortProducts('newest');
+        numShowing.innerText = "Showing " + products.length + " results";
+    });
 
     const productList = document.getElementById('product-list');
     const sortDropdown = document.getElementById('sort');
+    const numShowing = document.getElementById('num_showing');
 
     // Insert element into HTML
     function renderProducts(products) {
@@ -22,20 +23,19 @@ document.addEventListener('DOMContentLoaded', () => {
             productItem.className = 'product-item';
             productItem.innerHTML = `
                 <figure class="product-figure">
-                    <div><a href="${product.link}" class="product-link">
-                        <img src="${product.image}" alt="${product.name}">
+                    <div><a href="../product?${product.ProductID}" class="product-link">
+                        <img src="../img/shop/${product.ProductImg}" alt="${product.ProductName}">
                     </a></div>
                     <figcaption>
-                        <h3>${product.name}</h3>
-                        <p>AUD ${product.price.toFixed(2)}</p>
+                        <h3>${product.ProductName}</h3>
+                        <p>AUD ${product.ProductPrice.toFixed(2)}</p>
                     </figcaption>
                 </figure>
-                <button class="view-detail-button" onclick="window.location.href='${product.link}'">View Detail</button>
+                <button class="view-detail-button" onclick="window.location.href='../product?${product.ProductID}'">View Detail</button>
             `;
             productList.appendChild(productItem);
         });
     }
-
 
     // sort logic
     function sortProducts(criteria) {
@@ -51,9 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         renderProducts(sortedProducts);
     }
-
-    // Initial render with "newest" as default
-    sortProducts('newest');
 
     // sort when changing dropdown menu
     sortDropdown.addEventListener('change', (e) => {

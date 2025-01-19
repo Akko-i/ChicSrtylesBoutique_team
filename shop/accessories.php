@@ -33,7 +33,7 @@
         </nav>
 
         <section class="sort_items">
-            <p>Showing 8 results</p>
+            <p id="num_showing"></p>
 
             <div>
                 <label for="sort" class="visually-hidden">Sort items by:</label>
