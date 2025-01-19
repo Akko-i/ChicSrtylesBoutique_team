@@ -21,6 +21,13 @@ a {
     text-decoration: none;
     color: inherit;
 }
+
+#login a:hover, 
+.createaccount a:hover {
+    color: #C30A0A !important; /* Matches the button's color */
+    transition: color 0.3s ease;
+}
+
 button {
     background: none;
     border: none;
@@ -200,6 +207,63 @@ header nav, header .header-icons{
     width: 60%;
     margin: auto;
 }
+
+
+
+/* User icon and dropdown menu styles */
+/* User icon container */
+#userIconContainer {
+    position: relative;
+}
+
+/* User menu styles */
+#userMenu {
+    display: none; /* Default: hidden */
+    position: absolute;
+    right: 0;
+    top: 40px;
+    background: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    z-index: 1000;
+    width: 200px;
+    overflow: hidden;
+}
+
+/* Show menu when the "active" class is added */
+#userMenu.active {
+    display: block; /* Makes the menu visible */
+}
+
+/* User menu list styles */
+#userMenu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#userMenu ul li {
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#userMenu ul li:hover {
+    background-color: #f0f0f0; /* Highlight on hover */
+}
+
+#userMenu ul li a {
+    text-decoration: none;
+    color: #000;
+    display: block;
+}
+
+#userMenu ul li a:hover {
+    text-decoration: underline;
+}
+
+
 
 /* background overlay */
 #overlay {

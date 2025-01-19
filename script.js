@@ -72,3 +72,30 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', onScroll);
 });
 
+
+document.addEventListener("DOMContentLoaded", () => {
+    const userIcon = document.getElementById("userIcon"); // User icon
+    const userMenu = document.getElementById("userMenu"); // User menu
+
+    // Verify the elements exist before adding event listeners
+    if (userIcon && userMenu) {
+        console.log("User Icon and Menu initialized.");
+
+        // Toggle the menu when the user icon is clicked
+        userIcon.addEventListener("click", (e) => {
+            e.stopPropagation(); // Prevent event from bubbling up
+            userMenu.classList.toggle("active");
+            console.log("User icon clicked - toggling menu.");
+        });
+
+        // Close the menu when clicking outside
+        document.addEventListener("click", (e) => {
+            if (!userMenu.contains(e.target) && !userIcon.contains(e.target)) {
+                userMenu.classList.remove("active");
+                console.log("Clicked outside - hiding menu.");
+            }
+        });
+    } else {
+        console.error("User icon or menu not found.");
+    }
+});
