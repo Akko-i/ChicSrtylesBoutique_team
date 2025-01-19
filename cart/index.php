@@ -18,7 +18,7 @@
     if ($_POST) {
         // Insert products into cart item
         $stmt = $conn->prepare("INSERT INTO CartItems (UserID, ProductID, ProductAmount) VALUES (?, ?, ?);");
-        $stmt->execute([$_SESSION['user_id'], '3', $_POST["amount"]]);
+        $stmt->execute([$_SESSION['user_id'], $_POST["product_id"], $_POST["amount"]]);
     }
 
     require_once "fetch_cart.php";

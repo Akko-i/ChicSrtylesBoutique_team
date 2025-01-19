@@ -65,31 +65,33 @@
                 <section class="product-info">
                     <?php
                     echo '<h2>'.$product["ProductName"].'</h2>
-                    <p class="price">AUD ' . number_format((float)$product["ProductPrice"], 2, '.', '') . '</p>
-
-                    <!-- Size -->
-                    <!-- <section class="size-selector">
-                        <label for="size">Select Size:</label>
-                        <select id="size" name="size" required>
-                            <option value="">-- Select a Size --</option>
-                            <option value="S">Small</option>
-                            <option value="M">Medium</option>
-                            <option value="L">Large</option>
-                            <option value="XL">X-Large</option>
-                        </select>
-                        <p id="sizeError">Please select a size before adding to the cart.</p>
-                    </section> -->';
+                    <p class="price">AUD ' . number_format((float)$product["ProductPrice"], 2, '.', '') . '</p>';
                     ?>
 
-                    <!-- Amount Selection -->
-                    <section class="amount-selector">
-                        <label for="amount">Amount :</label>
-                        <input type="number" id="amount" name="amount" value="1" min="1" max="3">
-                    </section>
+                    <form action="/cart/index.php" method="POST" >
+                        <!-- Size -->
+                        <section class="size-selector">
+                            <label for="size">Select Size:</label>
+                            <select id="size" name="size" required>
+                                <option value="">-- Select a Size --</option>
+                                <option value="S">Small</option>
+                                <option value="M">Medium</option>
+                                <option value="L">Large</option>
+                                <option value="XL">X-Large</option>
+                            </select>
+                            <p id="sizeError">Please select a size before adding to the cart.</p>
+                        </section>
 
-                    <!-- Cart Button -->
-                    <button class="add-to-cart-button">Add to Cart</button>
-
+                        <!-- Amount Selection -->
+                        <section class="amount-selector">
+                            <label for="amount">Amount :</label>
+                            <input type="number" id="amount" name="amount" value="1" min="1" max="3">
+                        </section>
+                        
+                        <input type="hidden" name="product_id" value="<?php echo $product["ProductID"]; ?>">
+                        <!-- Cart Button -->
+                        <button class="add-to-cart-button">Add to Cart</button>
+                    </form>
                     <!-- Product Description -->
                     <p class="product-description">
                         This beach vibes jewelry set includes a matching necklace and bracelet, both designed with natural stones and beads for a laid-back, bohemian look. Perfect for beach outings or summer festivals, this set adds a carefree, relaxed vibe to your look while maintaining an effortlessly chic style.
