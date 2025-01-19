@@ -1,3 +1,14 @@
+<?php 
+    require_once "cart_db_connect.php";
+
+    if ($_POST) {
+        // Insert products into cart item
+        $stmt = $conn->prepare("INSERT INTO CartItems (UserID, ProductID, ProductAmount) VALUES (?, ?, ?);");
+        $stmt->execute(['1', '3', $_POST["amount"]]);
+    }
+
+    require_once "fetch_cart.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,43 +43,39 @@
         <section class="cart">
             <table class="cart-table">
                 <tbody>
-                    <tr>
-                        <td class="product">
-                            <div class="product-info">
-                                <img src="../img/shop/DR8.png" alt="White cotton dress">
-                                <div class="product-details">
-                                    <p><a href="../product/DR8.php">White cotton dress</a></p>
-                                    <p class="subtotal">$120.00</p>
+                <?php 
+                    $row_num = 0;
+                    $total_price =0;
+                    while ($row_num < $cart_items_result->num_rows) {
+                        $row = $cart_items_result->fetch_assoc();
+                        $cart_item_price = $row["ProductPrice"] * $row["ProductAmount"];
+                        $total_price += $cart_item_price;
+                        echo
+                        '<tr>
+                            <td class="product">
+                                <div class="product-info">
+                                    <img src="../img/shop/'.$row["ProductImg"].'" alt="' . $row["ProductName"] . '">
+                                    <div class="product-details">
+                                        <p><a href="../product/AC8.html">' . $row["ProductName"] . '</a></p>
+                                        <p class="subtotal"> $' .number_format((float)$cart_item_price, 2, '.', '') . '</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td class="quantity">
-                            <input type="number" value="1" min="1">
-                            <button class="remove-item"><img src="../img/cart/icon-cross.svg" alt="Remove this product"></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="product">
-                            <div class="product-info">
-                                <img src="../img/shop/AC8.png" alt="Double ring necklace">
-                                <div class="product-details">
-                                    <p><a href="../product/AC8.php">Double ring necklace</a></p>
-                                    <p class="subtotal">$120.00</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="quantity">
-                            <input type="number" value="1" min="1">
-                            <button class="remove-item"><img src="../img/cart/icon-cross.svg" alt="Remove this product"></button>
-                        </td>
-                    </tr>
-                                    </tbody>
+                            </td>
+                            <td class="quantity">
+                                <input type="number" value="'.$row["ProductAmount"].'" min="1">
+                                <button class="remove-item"><img src="../img/cart/icon-cross.svg" alt="Remove this product"></button>
+                            </td>
+                        </tr>';
+                        $row_num++;
+                    }
+                ?>
+                </tbody>
             </table>
         
             <div class="cart-totals">
                 <div class="totals-row">
                     <span>Total</span>
-                    <span>$240.00</span>
+                    <span><?php echo "$" .number_format((float)$total_price, 2, '.', ''); ?></span>
                 </div>
             </div>
         
@@ -85,3 +92,5 @@
 
 </body>
 </html>
+
+<?php $conn->close(); ?>
