@@ -1,5 +1,5 @@
 <?php 
-    require_once "cart_db_connect.php";
+    require_once "../db_connection.php";
 
     if ($_POST) {
         // Insert products into cart item

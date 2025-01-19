@@ -2,7 +2,7 @@
 
 $stripeSecretKey = $_ENV["STRIPE_KEY"];
 require_once 'stripe-php/init.php';
-require_once 'cart_db_connect.php';
+require_once '../db_connection.php';
 require_once "fetch_cart.php";
 
 if ($stripeSecretKey == "") {
@@ -40,7 +40,7 @@ $checkout_session = \Stripe\Checkout\Session::create([
   'line_items' => $line_items,
   'mode' => 'payment',
   'success_url' => $DOMAIN . '/cart/thankyou.php',
-  'cancel_url' => $DOMAIN . '/cart/cart.php',
+  'cancel_url' => $DOMAIN . '/cart/index.php',
   'billing_address_collection' => 'required',
   'shipping_address_collection' => [
     'allowed_countries' => ['AU'],
