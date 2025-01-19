@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Database of products
     let products = [];
-    fetch("fetch_products.php").then(function(response) {
+    fetch("fetch_products.php?4").then(function(response) {
         return response.json();
     }).then(function(data) {
         products = data;
