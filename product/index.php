@@ -75,17 +75,7 @@
 
                     <form action="/cart/index.php" method="POST" >
                         <!-- Size -->
-                        <section class="size-selector">
-                            <label for="size">Select Size:</label>
-                            <select id="size" name="size" required>
-                                <option value="">-- Select a Size --</option>
-                                <option value="S">Small</option>
-                                <option value="M">Medium</option>
-                                <option value="L">Large</option>
-                                <option value="XL">X-Large</option>
-                            </select>
-                            <p id="sizeError">Please select a size before adding to the cart.</p>
-                        </section>
+                        <?php require_once "fetch_size_selector.php"; ?>
 
                         <!-- Amount Selection -->
                         <section class="amount-selector">
