@@ -79,7 +79,7 @@
                                     </div>
                                 </td>
                                 <td class="quantity">
-                                    <input type="number" value="'.$row["ProductAmount"].'" min="1" onchange="onUpdateItemAmountInCart('.$row["ProductID"].', this.value)">
+                                    <input type="number" value="'.$row["ProductAmount"].'" min="1" onchange="onUpdateItemAmountInCart('.$row["ProductID"].', '.$row["ProductSize"].', this.value)">
                                     <button class="remove-item" onclick="onRemoveFromCartClicked('. $row["ProductID"] .');"><img src="../img/cart/icon-cross.svg" alt="Remove this product"></button>
                                 </td>
                             </tr>';

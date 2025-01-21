@@ -5,10 +5,16 @@ session_start();
 
 $data = explode("&", $_SERVER["QUERY_STRING"]);
 $productID = $data[0];
-$newAmount = $data[1];
+$sizeID = $data[1];
+$newAmount = $data[2];
 
-$stmt = $conn->prepare("UPDATE CartItems SET ProductAmount=" . $newAmount . " WHERE CartItems.UserID=" . $_SESSION["user_id"] . " AND CartItems.ProductID=" . $productID);
+$query = 'UPDATE CartItems SET ProductAmount=' . $newAmount . 
+         ' WHERE CartItems.UserID=' . $_SESSION["user_id"] .
+         ' AND CartItems.ProductID=' . $productID .
+         ' AND CartItems.ProductSize=' .$sizeID;
+
+$stmt = $conn->prepare($query);
 $stmt->execute();
 $stmt->close();
 
-echo "Updated cart";
+echo " Updated cart";

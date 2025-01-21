@@ -6,8 +6,8 @@ function onRemoveFromCartClicked(productID) {
     });
 }
 
-function onUpdateItemAmountInCart(productID, newAmount) {
-    fetch("update_item_amount.php?" + productID + "&" + newAmount).then(function(response) {
+function onUpdateItemAmountInCart(productID, sizeID, newAmount) {
+    fetch("update_item_amount.php?" + productID + "&" + sizeID + "&" + newAmount).then(function(response) {
         return response.text();
     }).then(function(data) {
         window.location.href = window.location.href;
