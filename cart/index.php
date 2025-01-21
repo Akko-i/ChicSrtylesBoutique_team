@@ -17,11 +17,10 @@
 
     if ($_POST) {
         // Insert products into cart item
-        if (isset($_POST["size"])) {
-            $stmt = $conn->prepare("INSERT INTO CartItems (UserID, ProductID, ProductAmount, ProductSize) VALUES (?, ?, ?, ?);");
+        $stmt = $conn->prepare("INSERT INTO CartItems (UserID, ProductID, ProductAmount, ProductSize) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE ProductAmount = ProductAmount + ".$_POST["amount"].";");
+        if (isset($_POST["size"]) ) {
             $stmt->execute([$_SESSION['user_id'], $_POST["product_id"], $_POST["amount"], $_POST["size"]]);
         } else {
-            $stmt = $conn->prepare("INSERT INTO CartItems (UserID, ProductID, ProductAmount, ProductSize) VALUES (?, ?, ?, ?);");
             $stmt->execute([$_SESSION['user_id'], $_POST["product_id"], $_POST["amount"], 5]);
         }
     }
