@@ -50,7 +50,7 @@
                                 </td>
                                 <td>Shipped</td>
                                 <td>
-                                    <button class="order-view-btn" type="button" onclick="location.href='order_details_fulfill.html'">View Details</button>
+                                    <button class="order-view-btn" type="button" onclick="location.href='order_details_fulfill.php'">View Details</button>
                                 </td>
                             </tr>
                             <tr>
@@ -63,13 +63,13 @@
                                 </td>
                                 <td>Processing</td>
                                 <td>
-                                    <button class="order-view-btn" type="button" onclick="location.href='order_details_fulfill.html'">View Details</button>
+                                    <button class="order-view-btn" type="button" onclick="location.href='order_details_fulfill.php'">View Details</button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                            </main>
+            </main>
             <footer>
                 <div class="container">
                     <small>©2024 All Rights Reserved</small>

@@ -28,7 +28,7 @@
         <div class="flex2">
             <main>
                 <h2>Products</h2>
-                <button class="add-product-btn" type=”button” onclick="location.href='products_new.html'">+ Add New Product</button>
+                <button class="add-product-btn" type=”button” onclick="location.href='products_new.php'">+ Add New Product</button>
 
 <div class="scrollable-table">
     <table class="product-table">
@@ -50,7 +50,7 @@
                 <td>$120</td>
                 <td>30</td>
                 <td>
-                    <button class="edit-btn" type="button" onclick="location.href='products_edit.html'">Edit</button>
+                    <button class="edit-btn" type="button" onclick="location.href='products_edit.php'">Edit</button>
                     <button class="delete-btn" type="button">Delete</button>
                 </td>
             </tr>
@@ -61,7 +61,7 @@
                 <td>$120</td>
                 <td>30</td>
                 <td>
-                    <button class="edit-btn" type="button" onclick="location.href='products_edit.html'">Edit</button>
+                    <button class="edit-btn" type="button" onclick="location.href='products_edit.php'">Edit</button>
                     <button class="delete-btn" type="button">Delete</button>
                 </td>
             </tr>
