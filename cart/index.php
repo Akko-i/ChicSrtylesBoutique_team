@@ -17,8 +17,13 @@
 
     if ($_POST) {
         // Insert products into cart item
-        $stmt = $conn->prepare("INSERT INTO CartItems (UserID, ProductID, ProductAmount) VALUES (?, ?, ?);");
-        $stmt->execute([$_SESSION['user_id'], $_POST["product_id"], $_POST["amount"]]);
+        if (isset($_POST["size"])) {
+            $stmt = $conn->prepare("INSERT INTO CartItems (UserID, ProductID, ProductAmount, ProductSize) VALUES (?, ?, ?, ?);");
+            $stmt->execute([$_SESSION['user_id'], $_POST["product_id"], $_POST["amount"], $_POST["size"]]);
+        } else {
+            $stmt = $conn->prepare("INSERT INTO CartItems (UserID, ProductID, ProductAmount, ProductSize) VALUES (?, ?, ?, ?);");
+            $stmt->execute([$_SESSION['user_id'], $_POST["product_id"], $_POST["amount"], 5]);
+        }
     }
 
     require_once "fetch_cart.php";
@@ -56,14 +61,20 @@
                             $row = $cart_items_result->fetch_assoc();
                             $cart_item_price = $row["ProductPrice"] * $row["ProductAmount"];
                             $total_price += $cart_item_price;
-                            echo
+
+                            $size_name_text = "";
+                            if ($row["SizeName"] != "NONE") {
+                                $size_name_text = '<p> ' . $row["SizeName"] . '</p>';
+                            }
+                            echo 
                             '<tr id="product_' . $row["ProductID"] . '">
                                 <td class="product">
                                     <div class="product-info">
                                         <img src="../img/shop/'.$row["ProductImg"].'" alt="' . $row["ProductName"] . '">
                                         <div class="product-details">
                                             <p><a href="../product/AC8.html">' . $row["ProductName"] . '</a></p>
-                                            <p class="subtotal"> $' .number_format((float)$cart_item_price, 2, '.', '') . '</p>
+                                            <p class="subtotal"> $' .number_format((float)$cart_item_price, 2, '.', '') . '</p>'
+                                            . $size_name_text .'
                                         </div>
                                     </div>
                                 </td>
