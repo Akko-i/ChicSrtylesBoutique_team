@@ -72,7 +72,7 @@
                                     <div class="product-info">
                                         <img src="../img/shop/'.$row["ProductImg"].'" alt="' . $row["ProductName"] . '">
                                         <div class="product-details">
-                                            <p><a href="../product/AC8.html">' . $row["ProductName"] . '</a></p>
+                                            <p><a href="../product?'.$row["ProductID"].' "> ' . $row["ProductName"] . '</a></p>
                                             <p class="subtotal"> $' .number_format((float)$cart_item_price, 2, '.', '') . '</p>'
                                             . $size_name_text .'
                                         </div>
