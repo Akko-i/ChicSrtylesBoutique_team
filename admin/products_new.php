@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Product - Chic Style Boutique</title>
-    <link rel="stylesheet" href="../../style.css">
+    <title>Add New Product - Chic Style Boutique</title>
+    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="admin-dashboard.css">
-    <script src="../../script.js"></script>
+    <script src="../script.js"></script>
     <script src="admin-dashboard.js"></script>
 </head>
 <body>
@@ -16,18 +16,18 @@
                 <h1>CHIC STYLES BOUTIQUE</h1>
                 <nav>
                     <ul>
-                        <li><a href="products.html">Products →</a></li>
-                        <li><a href="orders.html">Orders →</a></li>
-                        <li><a href="customers.html">Customers →</a></li>
-                        <li><a href="index.html">Log out →</a></li>
+                        <li><a href="products.php">Products →</a></li>
+                        <li><a href="orders.php">Orders →</a></li>
+                        <li><a href="customers.php">Customers →</a></li>
+                        <li><a href="index.php">Log out →</a></li>
                     </ul>
                 </nav>
             </div>
         </aside>
 
-        <div class="flex2">
+        <div class="flex2">  
             <main class="product-edit">
-                <h2>Edit Product</h2>
+                <h2>Add New Product</h2>
                 
                 <form action="/update-product" method="POST" enctype="multipart/form-data">
                     <fieldset>

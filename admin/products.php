@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products - Chic Style Boutique</title>
-    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="admin-dashboard.css">
-    <script src="../../script.js"></script>
+    <script src="../script.js"></script>
     <script src="admin-dashboard.js"></script>
 </head>
 <body>
@@ -16,10 +16,10 @@
                 <h1>CHIC STYLES BOUTIQUE</h1>
                 <nav>
                     <ul>
-                        <li><a href="products.html">Products →</a></li>
-                        <li><a href="orders.html">Orders →</a></li>
-                        <li><a href="customers.html">Customers →</a></li>
-                        <li><a href="index.html">Log out →</a></li>
+                        <li><a href="products.phpl">Products →</a></li>
+                        <li><a href="orders.php">Orders →</a></li>
+                        <li><a href="customers.php">Customers →</a></li>
+                        <li><a href="index.php">Log out →</a></li>
                     </ul>
                 </nav>
             </div>
@@ -45,7 +45,7 @@
         <tbody>
             <tr>
                 <td>AC1</td>
-                <td><img src="../../img/shop/AC1.png" alt="Beach vibes set"></td>
+                <td><img src="../img/shop/AC1.png" alt="Beach vibes set"></td>
                 <td>Beach vibes set</td>
                 <td>$120</td>
                 <td>30</td>
@@ -56,7 +56,7 @@
             </tr>
             <tr>
                 <td>DR1</td>
-                <td><img src="../../img/shop/DR1.png" alt="Navy long dress"></td>
+                <td><img src="../img/shop/DR1.png" alt="Navy long dress"></td>
                 <td>Navy long dress</td>
                 <td>$120</td>
                 <td>30</td>
