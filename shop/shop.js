@@ -46,9 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (criteria === 'oldest') {
             sortedProducts = [...products].sort((a, b) => new Date(a.date) - new Date(b.date));
         } else if (criteria === 'price-high') {
-            sortedProducts = [...products].sort((a, b) => b.price - a.price);
+            sortedProducts = [...products].sort((a, b) => b.ProductPrice - a.ProductPrice);
         } else if (criteria === 'price-low') {
-            sortedProducts = [...products].sort((a, b) => a.price - b.price);
+            sortedProducts = [...products].sort((a, b) => a.ProductPrice - b.ProductPrice);
         }
         renderProducts(sortedProducts);
     }
