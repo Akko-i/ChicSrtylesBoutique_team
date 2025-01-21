@@ -41,13 +41,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function sortProducts(criteria) {
         let sortedProducts;
         if (criteria === 'newest') {
-            sortedProducts = [...products].sort((a, b) => new Date(b.date) - new Date(a.date));
+            sortedProducts = [...products].sort((a, b) => new Date(b.ProductDate) - new Date(a.ProductDate));
         } else if (criteria === 'oldest') {
-            sortedProducts = [...products].sort((a, b) => new Date(a.date) - new Date(b.date));
+            sortedProducts = [...products].sort((a, b) => new Date(a.ProductDate) - new Date(b.ProductDate));
         } else if (criteria === 'price-high') {
-            sortedProducts = [...products].sort((a, b) => b.price - a.price);
+            sortedProducts = [...products].sort((a, b) => b.ProductPrice - a.ProductPrice);
         } else if (criteria === 'price-low') {
-            sortedProducts = [...products].sort((a, b) => a.price - b.price);
+            sortedProducts = [...products].sort((a, b) => a.ProductPrice - b.ProductPrice);
         }
         renderProducts(sortedProducts);
     }
