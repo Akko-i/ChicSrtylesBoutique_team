@@ -115,6 +115,12 @@ if (!empty($image['name'])) {
                 </form>
                 
             </main>
+            <footer>
+                <div class="container">
+                    <small>©<?php echo date('Y'); ?> All Rights Reserved</small>
+                </div>
+            </footer>
+
         </div>
     </div>
 </body>
