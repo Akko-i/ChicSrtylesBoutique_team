@@ -214,6 +214,7 @@ header nav, header .header-icons{
 /* User icon container */
 #userIconContainer {
     position: relative;
+    max-width: 25px;
 }
 
 /* User menu styles */

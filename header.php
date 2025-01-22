@@ -59,6 +59,8 @@ if ($isUserLoggedIn) {
                 </li>
                 <li><a href="<?php echo BASE_URL; ?>lookbook/index.php">Look Book</a></li>
                 <li><a href="<?php echo BASE_URL; ?>blogs/index.php">Blogs</a></li>
+                <li class="sp_only"><a href="<?php echo BASE_URL; ?>contactus/">Contact Us</a></li>
+                <li class="sp_only"><a href="<?php echo BASE_URL; ?>aboutus/">About Us</a></li>
             </ul>
         </nav>
 
@@ -71,6 +73,8 @@ if ($isUserLoggedIn) {
 
         <!-- Icons -->
         <ul class="header-icons">
+            <li class="pc_only"><a href="<?php echo BASE_URL; ?>contactus/">Contact Us</a></li>
+            <li class="pc_only"><a href="<?php echo BASE_URL; ?>aboutus/">About Us</a></li>
             <li id="userIconContainer">
                 <img src="<?php echo BASE_URL; ?>img/header/icon-mypage.png" alt="User" id="userIcon">
                 <div id="userMenu" class="user-menu">
