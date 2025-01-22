@@ -35,7 +35,7 @@ $adminName = isset($_SESSION['admin_name']) ? $_SESSION['admin_name'] : 'Admin';
             </main>
             <footer>
                 <div class="container">
-                    <small>©2024 All Rights Reserved</small>
+                    <small>©<?php echo date('Y'); ?> All Rights Reserved</small>
                 </div>
             </footer>
         </div>
