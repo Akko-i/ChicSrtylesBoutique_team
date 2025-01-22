@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 22, 2025 at 04:51 AM
+-- Generation Time: Jan 22, 2025 at 02:39 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -95,7 +95,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`order_id`, `user_id`, `order_date`, `status`, `total_price`, `shipping_address_id`, `billing_address_id`, `tracking_number`) VALUES
-(2, 'aed4a610-d6b2-11ef-a076-acde48001122', '2025-01-20 17:22:36', 'Completed', 300.00, 's1d8c8e4-d6b2-11ef-a076-acde48001122', 'b1d8c8e3-d6b2-11ef-a076-acde48001122', '12344');
+(2, 'aed4a610-d6b2-11ef-a076-acde48001122', '2025-01-20 17:22:36', 'Completed', 560.00, 's1d8c8e4-d6b2-11ef-a076-acde48001122', 'b1d8c8e3-d6b2-11ef-a076-acde48001122', '12344');
 
 -- --------------------------------------------------------
 
@@ -111,6 +111,15 @@ CREATE TABLE `order_items` (
   `price` decimal(10,2) NOT NULL,
   `subtotal` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_items`
+--
+
+INSERT INTO `order_items` (`order_item_id`, `order_id`, `product_id`, `quantity`, `price`, `subtotal`) VALUES
+(1, 2, 1, 2, 120.00, 240.00),
+(2, 2, 3, 1, 80.00, 80.00),
+(3, 2, 5, 3, 80.00, 240.00);
 
 -- --------------------------------------------------------
 
@@ -454,7 +463,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `order_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `order_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `product`
