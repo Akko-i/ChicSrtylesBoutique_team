@@ -20,6 +20,6 @@
                 <li><a href="https://www.facebook.com/" target="_blank"><img src="<?php echo BASE_URL; ?>img/footer/icon-fb.png" alt="Facebook"></a></li>
             </ul>
         </div>
-        <small>©2024 All Rights Reserved</small>
+        <small>©<?php echo date('Y'); ?> All Rights Reserved</small>
     </div>
 </footer>
