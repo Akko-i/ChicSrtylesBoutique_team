@@ -97,7 +97,7 @@ $order_items->data_seek(0);
                             <input type="text" id="tracking-number" name="tracking_number" value="<?php echo htmlspecialchars($order['tracking_number']); ?>" placeholder="Enter tracking number">
                         </fieldset>
                         
-                        <button type="submit">Update Order</button>
+                        <button type="submit" class="update-btn">Update Order</button>
                     </form>
                 </section>
                             

@@ -116,7 +116,7 @@
 }
 
 /* Button styles */
-.edit-btn, .delete-btn, .order-view-btn, .back-btn {
+.edit-btn, .delete-btn, .order-view-btn, .back-btn, .update-btn {
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
@@ -126,11 +126,15 @@
     margin-top: 0;
 }
 
-.edit-btn, .order-view-btn {
+.edit-btn, .order-view-btn, .update-btn {
     background-color: #000;
     color: #fff;
     border: 1px solid #000;
     transition: background-color 0.3s;
+}
+.update-btn {
+  margin-top: 20px;
+  width: 250px
 }
 .back-btn{
   color: #000;
@@ -217,6 +221,10 @@
   background-color: inherit;
   padding: 0;
 }
+.size-group{
+  display: flex;
+  gap: 20px;
+}
 
 /* -------------------------
     Order Details
@@ -231,7 +239,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
-.oders-details section{
+section{
   margin: 20px 0;
 }
 .address-details article:not(:last-of-type){
@@ -254,11 +262,11 @@
 fieldset{
   border: 0;
 }
-/* .product-edit .thumbnail input{
+.product-edit .thumbnail input{
   background-color: inherit;
     padding: 0;
     margin-bottom: 10px;
-} */
+}
 button{
   margin-top: 20px;
 }
