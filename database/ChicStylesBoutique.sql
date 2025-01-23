@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 23, 2025 at 11:33 AM
+-- Generation Time: Jan 23, 2025 at 11:42 AM
 -- Server version: 9.1.0
 -- PHP Version: 8.2.20
 
@@ -28,6 +28,29 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `billing_address` (
+  `billing_id` char(36) COLLATE utf8mb4_general_ci NOT NULL,
+  `user_id` char(36) COLLATE utf8mb4_general_ci NOT NULL,
+  `first_name` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `last_name` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `company_name` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `phone` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `country` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `address_line1` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `address_line2` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `suburb` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `state` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `postcode` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
+  `last_updated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `billing_details`
+--
+
+CREATE TABLE `billing_details` (
   `billing_id` char(36) COLLATE utf8mb4_general_ci NOT NULL,
   `user_id` char(36) COLLATE utf8mb4_general_ci NOT NULL,
   `first_name` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
@@ -310,7 +333,8 @@ CREATE TABLE `USER` (
 --
 
 INSERT INTO `USER` (`user_id`, `user_first_name`, `user_last_name`, `user_password`, `user_email`, `user_phone`, `user_role_id`) VALUES
-(6, 'Yuka', 'T', '$2y$10$AcuLL4zm0e9mHvcFvYb4/eHWzWMY.4iInyxmqoFssbISIESViAmAm', 'yuka@y.com', '', 2);
+(6, 'Yuka', 'T', '$2y$10$AcuLL4zm0e9mHvcFvYb4/eHWzWMY.4iInyxmqoFssbISIESViAmAm', 'yuka@y.com', '', 2),
+(7, 'P', 'G', '$2y$10$b3i/ZD3.em7/7HgkAKXrkugRRqb7WGddDsfLSUXjUxfne0oyNPEka', 'pg@p.com', '', 1);
 
 --
 -- Indexes for dumped tables
@@ -391,7 +415,7 @@ ALTER TABLE `Sizes`
 -- AUTO_INCREMENT for table `USER`
 --
 ALTER TABLE `USER`
-  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
