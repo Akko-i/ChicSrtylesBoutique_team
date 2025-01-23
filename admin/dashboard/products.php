@@ -10,7 +10,7 @@ if (!isset($_SESSION['admin_id'])) {
 }
 
 // Fetch products from the database
-$sql = "SELECT product_id, product_name, price, product_image FROM product";
+$sql = "SELECT ProductID, ProductName, ProductPrice, ProductImg, ProductStock FROM Products";
 $result = $conn->query($sql);
 
 if (!$result) {
@@ -55,14 +55,14 @@ if (!$result) {
                         <tbody>
                             <?php while ($row = $result->fetch_assoc()): ?>
                                 <tr>
-                                    <td><?php echo htmlspecialchars($row['product_id']); ?></td>
-                                    <td><img src="<?php echo BASE_URL . 'img/shop/' . htmlspecialchars($row['product_image']); ?>" alt="<?php echo htmlspecialchars($row['product_name']); ?>"></td>
-                                    <td><?php echo htmlspecialchars($row['product_name']); ?></td>
-                                    <td>$<?php echo number_format($row['price'], 2); ?></td>
-                                    <td><?php echo htmlspecialchars($row['stock']); ?></td>
+                                    <td><?php echo htmlspecialchars($row['ProductID']); ?></td>
+                                    <td><img src="<?php echo BASE_URL . 'img/shop/' . htmlspecialchars($row['ProductImg']); ?>" alt="<?php echo htmlspecialchars($row['ProductName']); ?>"></td>
+                                    <td><?php echo htmlspecialchars($row['ProductName']); ?></td>
+                                    <td>$<?php echo number_format($row['ProductPrice'], 2); ?></td>
+                                    <td><?php echo htmlspecialchars($row['ProductStock']); ?></td>
                                     <td>
-                                        <button class="edit-btn" type="button" onclick="location.href='<?php echo BASE_URL; ?>admin/dashboard/products_edit.php?id=<?php echo $row['product_id']; ?>'">Edit</button>
-                                        <button class="delete-btn" type="button" onclick="deleteProduct(<?php echo $row['product_id']; ?>)">Delete</button>
+                                        <button class="edit-btn" type="button" onclick="location.href='<?php echo BASE_URL; ?>admin/dashboard/products_edit.php?id=<?php echo $row['ProductID']; ?>'">Edit</button>
+                                        <button class="delete-btn" type="button" onclick="deleteProduct(<?php echo $row['ProductID']; ?>)">Delete</button>
                                     </td>
                                 </tr>
                             <?php endwhile; ?>

@@ -10,10 +10,10 @@ if (!isset($_SESSION['admin_id'])) {
 }
 
 // Fetch all categories
-$categories = $conn->query("SELECT * FROM category");
+$categories = $conn->query("SELECT * FROM Categories");
 
 // Fetch all sizes
-$sizes = $conn->query("SELECT * FROM size");
+$sizes = $conn->query("SELECT * FROM Sizes");
 
 if (!empty($image['name'])) {
     $target_dir = "../../img/shop/";
@@ -45,9 +45,9 @@ if (!empty($image['name'])) {
     }
 
     // Save the file name to the database
-    $sql = "UPDATE product SET product_image = ? WHERE product_id = ?";
+    $sql = "UPDATE product SET ProductImg = ? WHERE ProductID = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param('si', $image_name, $product_id);
+    $stmt->bind_param('si', $image_name, $ProductID);
     $stmt->execute();
 }
 
@@ -73,7 +73,7 @@ if (!empty($image['name'])) {
                 <form action="product_save.php" method="POST" enctype="multipart/form-data">
                     <fieldset>
                         <label for="product-name">Product Name</label>
-                        <input type="text" id="product-name" name="product_name" required>    
+                        <input type="text" id="product-name" name="ProductName" required>    
                     </fieldset>
                     <fieldset>
                         <label for="price">Price</label>
@@ -88,8 +88,8 @@ if (!empty($image['name'])) {
                         <div class="category-group">
                             <?php while ($category = $categories->fetch_assoc()): ?>
                                 <label>
-                                    <input type="checkbox" name="categories[]" value="<?php echo $category['category_id']; ?>">
-                                    <?php echo htmlspecialchars($category['category_name']); ?>
+                                    <input type="checkbox" name="categories[]" value="<?php echo $category['CategoryID']; ?>">
+                                    <?php echo htmlspecialchars($category['CategoryName']); ?>
                                 </label>
                             <?php endwhile; ?>
                         </div>    
@@ -99,8 +99,8 @@ if (!empty($image['name'])) {
                         <div class="size-group">
                             <?php while ($size = $sizes->fetch_assoc()): ?>
                                 <label>
-                                    <strong><?php echo htmlspecialchars($size['size_value']); ?></strong>
-                                    <input type="number" name="size_stock[<?php echo $size['size_id']; ?>]" min="0" value="0">
+                                    <strong><?php echo htmlspecialchars($size['SizeName']); ?></strong>
+                                    <input type="number" name="size_stock[<?php echo $size['SizeID']; ?>]" min="0" value="0">
                                 </label>
                             <?php endwhile; ?>
                         </div>

@@ -35,9 +35,9 @@ if (!$order) {
 }
 
 // Fetch order items
-$sql_items = "SELECT oi.quantity, oi.price, p.product_name, p.product_image 
+$sql_items = "SELECT oi.quantity, oi.price, p.ProductName, p.ProductImg 
               FROM order_items oi
-              JOIN product p ON oi.product_id = p.product_id
+              JOIN product p ON oi.ProductID = p.ProductID
               WHERE oi.order_id = ?";
 $stmt_items = $conn->prepare($sql_items);
 $stmt_items->bind_param('i', $order_id);
@@ -135,8 +135,8 @@ $order_items->data_seek(0);
                         <tbody>
                             <?php while ($item = $order_items->fetch_assoc()): ?>
                                 <tr>
-                                    <td><img src="../../img/shop/<?php echo htmlspecialchars($item['product_image']); ?>" alt="<?php echo htmlspecialchars($item['product_name']); ?>"></td>
-                                    <td><?php echo htmlspecialchars($item['product_name']); ?></td>
+                                    <td><img src="../../img/shop/<?php echo htmlspecialchars($item['ProductImg']); ?>" alt="<?php echo htmlspecialchars($item['ProductName']); ?>"></td>
+                                    <td><?php echo htmlspecialchars($item['ProductName']); ?></td>
                                     <td>$<?php echo number_format($item['price'], 2); ?></td>
                                     <td>×<?php echo htmlspecialchars($item['quantity']); ?></td>
                                 </tr>

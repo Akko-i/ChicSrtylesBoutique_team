@@ -10,7 +10,7 @@ if (!isset($_SESSION['admin_id'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $product_name = $_POST['product_name'];
+    $ProductName = $_POST['ProductName'];
     $price = floatval($_POST['price']);
     $description = $_POST['description'];
     $categories = isset($_POST['categories']) ? $_POST['categories'] : [];
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $image = $_FILES['image'];
 
     // Validate required fields
-    if (empty($product_name) || empty($price) || empty($description)) {
+    if (empty($ProductName) || empty($price) || empty($description)) {
         die("All fields are required.");
     }
 
@@ -35,28 +35,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Insert product into the `product` table
-    $sql = "INSERT INTO product (product_name, price, description, product_image) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO Products (ProductName, ProductPrice, ProductDescription, ProductImg, ProductImgLarge) VALUES (?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param('sdss', $product_name, $price, $description, $image_name);
+    $stmt->bind_param('sdsss', $ProductName, $price, $description, $image_name, $image_name);
 
     if (!$stmt->execute()) {
         die("Error adding product: " . $stmt->error);
     }
 
     // Get the inserted product ID
-    $product_id = $stmt->insert_id;
+    $ProductID = $stmt->insert_id;
 
     // Insert categories into `product_categories` table
-    $category_stmt = $conn->prepare("INSERT INTO product_categories (product_id, category_id) VALUES (?, ?)");
-    foreach ($categories as $category_id) {
-        $category_stmt->bind_param('ii', $product_id, $category_id);
+    $category_stmt = $conn->prepare("INSERT INTO ProductCategories (ProductID, CategoryID) VALUES (?, ?)");
+    foreach ($categories as $CategoryID) {
+        $category_stmt->bind_param('ii', $ProductID, $CategoryID);
         $category_stmt->execute();
     }
 
     // Insert stock into `product_size` table
-    $size_stmt = $conn->prepare("INSERT INTO product_size (product_id, size_id, stock) VALUES (?, ?, ?)");
-    foreach ($size_stock as $size_id => $stock) {
-        $size_stmt->bind_param('iii', $product_id, $size_id, $stock);
+    $size_stmt = $conn->prepare("INSERT INTO ProductSizes (ProductID, SizeID, Stock) VALUES (?, ?, ?)");
+    foreach ($size_stock as $SizeID => $stock) {
+        $size_stmt->bind_param('iii', $ProductID, $SizeID, $stock);
         $size_stmt->execute();
     }
 
