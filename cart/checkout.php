@@ -20,13 +20,22 @@ $total_price = 0;
 $line_items = [];
 while ($row_num < $cart_items_result->num_rows) {
     $row = $cart_items_result->fetch_assoc();
+
+    $stripe_product_name = $row["ProductName"];
+    // If product has a size then append it to the name
+    // E.g. Maxi Dress size small will show as "Maxi Dress (Small)"
+    // on the Stripe checkout page
+    if ($row["ProductSize"] != 5) {
+      $stripe_product_name = $stripe_product_name . " (".$row["SizeName"].")";
+    }
+
     // add to line_items
     array_push($line_items, 
     [
         "price_data" => [
             'currency' => 'aud',
             'product_data' => [
-              'name' => $row["ProductName"],
+              'name' => $stripe_product_name,
             ],
             'unit_amount' => $row["ProductPrice"]*100,
         ],
