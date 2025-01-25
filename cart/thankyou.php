@@ -12,6 +12,15 @@
 
 <?php include '../config.php'; ?>
 <?php include '../header.php'; ?>
+<?php include '../db_connection.php'; ?>
+<?php
+    if ($isUserLoggedIn) {
+        $query  = "DELETE FROM CartItems WHERE CartItems.UserID=" . $_SESSION["user_id"];
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $stmt->close();
+    }
+?>
 <body data-base-url="<?php echo BASE_URL; ?>">
 
     <!-- background-overlay -->
