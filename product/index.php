@@ -96,7 +96,9 @@
                     </form>
                     <!-- Product Description -->
                     <p class="product-description">
-                        This beach vibes jewelry set includes a matching necklace and bracelet, both designed with natural stones and beads for a laid-back, bohemian look. Perfect for beach outings or summer festivals, this set adds a carefree, relaxed vibe to your look while maintaining an effortlessly chic style.
+                        <?php
+                            echo $product["ProductDescription"];
+                        ?>
                     </p>
                 </section>
             </article>
