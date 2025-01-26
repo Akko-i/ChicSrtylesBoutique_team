@@ -24,7 +24,7 @@ a {
 
 #login a:hover, 
 .createaccount a:hover {
-    color: #C30A0A !important; /* Matches the button's color */
+    color: #C30A0A !important;
     transition: color 0.3s ease;
 }
 
@@ -81,13 +81,11 @@ header, footer, section, article, aside, nav, figure, figcaption {
     bottom: -20px;
     margin: auto;
     transform-origin: right top;
-    /* x軸width100%*0倍, y軸height2px*1倍 */
     transform: scale(0, 1);
     transition: transform .3s;
 }
 button:hover::before{
     transform-origin: left top;
-    /* x軸width100%*1倍, y軸height2px*1倍 */
     transform: scale(1, 1);
 }
 button span{
@@ -214,7 +212,7 @@ header nav, header .header-icons{
 /* User icon container */
 #userIconContainer {
     position: relative;
-    max-width: 25px;
+    max-width: 20px;
 }
 
 /* User menu styles */
@@ -288,15 +286,13 @@ header nav, header .header-icons{
 
 .header-icons {
     display: flex;
-    gap: 40px;
+    gap: 15px;
     align-items: center;
     justify-content: right;
 }
-.header-icons li:first-child img {
+
+.header-icons li:nth-child(3) img, .header-icons li:last-child img{
     width: 24px;
-}
-.header-icons li:last-child img {
-    width: 28px;
 }
 
 /* Hamburger Menu (SP View) */
@@ -311,11 +307,14 @@ header nav, header .header-icons{
     display: flex;
 }
 
-#mainNav ul li a{
+#mainNav ul li a, .header-icons li:nth-child(1) a, .header-icons li:nth-child(2) a{
     position: relative;
     z-index: 100;
 }
-#mainNav ul li a::before{
+.header-icons li:nth-child(1) a, .header-icons li:nth-child(2) a{
+    padding: 10px;
+}
+#mainNav ul li a::before, .header-icons li:nth-child(1) a::before, .header-icons li:nth-child(2) a::before{
     background-color: #C30A0A;
     content: '';
     width: 100%;
@@ -328,7 +327,7 @@ header nav, header .header-icons{
     transform: scale(0, 1);
     transition: transform .3s;
 }
-#mainNav ul li a:hover::before{
+#mainNav ul li a:hover::before, .header-icons li.pc_only a:hover::before{
     transform-origin: left top;
     transform: scale(1, 1);
 }
