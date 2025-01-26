@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 26, 2025 at 05:37 AM
+-- Generation Time: Jan 26, 2025 at 11:29 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -92,7 +92,8 @@ CREATE TABLE `CartItems` (
 --
 
 INSERT INTO `CartItems` (`UserID`, `ProductID`, `ProductAmount`, `ProductSize`) VALUES
-(12, 3, 4, 1);
+(12, 3, 4, 1),
+(13, 1, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -163,7 +164,9 @@ CREATE TABLE `ProductCategories` (
 --
 
 INSERT INTO `ProductCategories` (`ProductID`, `CategoryID`) VALUES
+(1, 3),
 (1, 4),
+(1, 5),
 (2, 3),
 (2, 4),
 (3, 3),
@@ -191,7 +194,9 @@ INSERT INTO `ProductCategories` (`ProductID`, `CategoryID`) VALUES
 (15, 2),
 (15, 5),
 (16, 2),
-(16, 5);
+(16, 5),
+(19, 4),
+(20, 4);
 
 -- --------------------------------------------------------
 
@@ -215,22 +220,24 @@ CREATE TABLE `Products` (
 --
 
 INSERT INTO `Products` (`ProductID`, `ProductName`, `ProductPrice`, `ProductImg`, `ProductImgLarge`, `ProductDate`, `ProductStock`, `ProductDescription`) VALUES
-(1, 'White cotton dress', 120, 'DR8.png', 'DR8_large.png', '2025-01-23 11:07:36', 1, 'A breathable and stylish white cotton dress.'),
-(2, 'Earth Tone Maxi Dress', 100, 'DR7.png', 'DR7_large.png', '2025-01-23 11:07:36', 0, 'Elegant earth-toned maxi dress.'),
-(3, 'Silky White dress', 80, 'DR6.png', 'DR6_large.png', '2025-01-23 11:07:36', 0, 'Silky and smooth white dress for special occasions.'),
-(4, 'Tropical flowy dress', 110, 'DR5.png', 'DR5_large.png', '2025-01-23 11:07:36', 0, 'Perfect for summer, a tropical-themed flowy dress.'),
-(5, 'Black mini dress', 80, 'DR4.png', 'DR4_large.png', '2025-01-23 11:07:36', 0, 'A chic black mini dress for parties.'),
-(6, 'Black slit dress', 100, 'DR3.png', 'DR3_large.png', '2025-01-23 11:07:36', 0, 'A stunning black dress with a slit design.'),
-(7, 'Feminine dots dress', 90, 'DR2.png', 'DR2_large.png', '2025-01-23 11:07:36', 0, 'Playful and feminine polka dots dress.'),
-(8, 'Navy long dress', 110, 'DR1.png', 'DR1_large.png', '2025-01-23 11:07:36', 0, 'Sophisticated navy long dress.'),
-(9, 'Double ring necklace', 120, 'AC8.png', 'AC8_large.png', '2025-01-23 11:07:36', 0, 'A modern double ring necklace.'),
-(10, 'Marble round earrings', 100, 'AC7.png', 'AC7_large.png', '2025-01-23 11:07:36', 0, 'Stylish marble round earrings.'),
-(11, 'Silver funk rings', 80, 'AC6.png', 'AC6_large.png', '2025-01-23 11:07:36', 0, 'Trendy silver funk rings.'),
-(12, 'Gold elegant anklet', 110, 'AC5.png', 'AC5_large.png', '2025-01-23 11:07:36', 0, 'An elegant gold anklet for all occasions.'),
-(13, 'Gold thin rings', 80, 'AC4.png', 'AC4_large.png', '2025-01-23 11:07:36', 0, 'Minimalist and sleek gold thin rings.'),
-(14, 'Silver ruby ring', 100, 'AC3.png', 'AC3_large.png', '2025-01-23 11:07:36', 0, 'A silver ring with a beautiful ruby.'),
-(15, 'Double thin necklace', 90, 'AC2.png', 'AC2_large.png', '2025-01-23 11:07:36', 0, 'A layered double thin necklace.'),
-(16, 'Beach vibes set', 110, 'AC1.png', 'AC1_large.png', '2025-01-23 11:07:36', 0, 'Perfect for summer, a beach vibes jewelry set.');
+(1, 'White cotton dress', 120, 'DR8.png', 'DR8_large.png', '2025-01-23 11:07:36', 6, 'A breathable and stylish white cotton dress.'),
+(2, 'Earth Tone Maxi Dress', 100, 'DR7.png', 'DR7_large.png', '2025-01-23 11:07:36', 7, 'Elegant earth-toned maxi dress.'),
+(3, 'Silky White dress', 80, 'DR6.png', 'DR6_large.png', '2025-01-23 11:07:36', 7, 'Silky and smooth white dress for special occasions.'),
+(4, 'Tropical flowy dress', 110, 'DR5.png', 'DR5_large.png', '2025-01-23 11:07:36', 20, 'Perfect for summer, a tropical-themed flowy dress.'),
+(5, 'Black mini dress', 80, 'DR4.png', 'DR4_large.png', '2025-01-23 11:07:36', 22, 'A chic black mini dress for parties.'),
+(6, 'Black slit dress', 100, 'DR3.png', 'DR3_large.png', '2025-01-23 11:07:36', 24, 'A stunning black dress with a slit design.'),
+(7, 'Feminine dots dress', 90, 'DR2.png', 'DR2_large.png', '2025-01-23 11:07:36', 15, 'Playful and feminine polka dots dress.'),
+(8, 'Navy long dress', 110, 'DR1.png', 'DR1_large.png', '2025-01-23 11:07:36', 26, 'Sophisticated navy long dress.'),
+(9, 'Double ring necklace', 120, 'AC8.png', 'AC8_large.png', '2025-01-23 11:07:36', 30, 'A modern double ring necklace.'),
+(10, 'Marble round earrings', 100, 'AC7.png', 'AC7_large.png', '2025-01-23 11:07:36', 30, 'Stylish marble round earrings.'),
+(11, 'Silver funk rings', 80, 'AC6.png', 'AC6_large.png', '2025-01-23 11:07:36', 20, 'Trendy silver funk rings.'),
+(12, 'Gold elegant anklet', 110, 'AC5.png', 'AC5_large.png', '2025-01-23 11:07:36', 15, 'An elegant gold anklet for all occasions.'),
+(13, 'Gold thin rings', 80, 'AC4.png', 'AC4_large.png', '2025-01-23 11:07:36', 20, 'Minimalist and sleek gold thin rings.'),
+(14, 'Silver ruby ring', 100, 'AC3.png', 'AC3_large.png', '2025-01-23 11:07:36', 10, 'A silver ring with a beautiful ruby.'),
+(15, 'Double thin necklace', 90, 'AC2.png', 'AC2_large.png', '2025-01-23 11:07:36', 29, 'A layered double thin necklace.'),
+(16, 'Beach vibes set', 110, 'AC1.png', 'AC1_large.png', '2025-01-23 11:07:36', 20, 'Perfect for summer, a beach vibes jewelry set.'),
+(19, 'test', 22, '1737886376_test.png', '1737886376_test.png', '2025-01-26 10:12:56', 4, 'aaaaa'),
+(20, 'test2', 40, '1737886936_test2.png', '1737886936_test2.png', '2025-01-26 10:22:16', 10, 'aaa');
 
 -- --------------------------------------------------------
 
@@ -249,39 +256,96 @@ CREATE TABLE `ProductSizes` (
 --
 
 INSERT INTO `ProductSizes` (`ProductID`, `SizeID`, `Stock`) VALUES
-(1, 1, 1),
+(1, 1, 3),
 (1, 2, 1),
 (1, 3, 1),
 (1, 4, 1),
+(1, 5, 0),
 (2, 1, 2),
-(2, 2, 0),
-(2, 3, 0),
-(2, 4, 0),
+(2, 2, 2),
+(2, 3, 2),
+(2, 4, 1),
 (2, 5, 0),
-(3, 1, 0),
-(3, 2, 0),
-(3, 3, 0),
-(3, 4, 0),
-(4, 1, 0),
-(4, 2, 0),
-(4, 3, 0),
-(4, 4, 0),
-(5, 1, 0),
-(5, 2, 0),
-(5, 3, 0),
-(5, 4, 0),
-(6, 1, 0),
-(6, 2, 0),
-(6, 3, 0),
-(6, 4, 0),
-(7, 1, 0),
-(7, 2, 0),
-(7, 3, 0),
-(7, 4, 0),
-(8, 1, 0),
-(8, 2, 0),
-(8, 3, 0),
-(8, 4, 0);
+(3, 1, 2),
+(3, 2, 1),
+(3, 3, 2),
+(3, 4, 2),
+(3, 5, 0),
+(4, 1, 3),
+(4, 2, 6),
+(4, 3, 7),
+(4, 4, 4),
+(4, 5, 0),
+(5, 1, 5),
+(5, 2, 7),
+(5, 3, 3),
+(5, 4, 7),
+(5, 5, 0),
+(6, 1, 10),
+(6, 2, 5),
+(6, 3, 4),
+(6, 4, 5),
+(6, 5, 0),
+(7, 1, 10),
+(7, 2, 2),
+(7, 3, 2),
+(7, 4, 1),
+(7, 5, 0),
+(8, 1, 7),
+(8, 2, 3),
+(8, 3, 9),
+(8, 4, 7),
+(8, 5, 0),
+(9, 1, 0),
+(9, 2, 0),
+(9, 3, 0),
+(9, 4, 0),
+(9, 5, 30),
+(10, 1, 0),
+(10, 2, 0),
+(10, 3, 0),
+(10, 4, 0),
+(10, 5, 30),
+(11, 1, 0),
+(11, 2, 0),
+(11, 3, 0),
+(11, 4, 0),
+(11, 5, 20),
+(12, 1, 0),
+(12, 2, 0),
+(12, 3, 0),
+(12, 4, 0),
+(12, 5, 15),
+(13, 1, 0),
+(13, 2, 0),
+(13, 3, 0),
+(13, 4, 0),
+(13, 5, 20),
+(14, 1, 0),
+(14, 2, 0),
+(14, 3, 0),
+(14, 4, 0),
+(14, 5, 10),
+(15, 1, 0),
+(15, 2, 0),
+(15, 3, 0),
+(15, 4, 0),
+(15, 5, 29),
+(16, 1, 0),
+(16, 2, 0),
+(16, 3, 0),
+(16, 4, 0),
+(16, 5, 20),
+(19, 1, 1),
+(19, 2, 3),
+(19, 3, 0),
+(19, 4, 0),
+(19, 5, 0),
+(20, 1, 1),
+(20, 2, 2),
+(20, 3, 3),
+(20, 4, 4),
+(20, 5, 0);
 
 -- --------------------------------------------------------
 
@@ -352,7 +416,8 @@ INSERT INTO `USER` (`user_id`, `user_first_name`, `user_last_name`, `user_passwo
 (7, 'P', 'G', '$2y$10$b3i/ZD3.em7/7HgkAKXrkugRRqb7WGddDsfLSUXjUxfne0oyNPEka', 'pg@p.com', '', 1),
 (11, 'Admin', 'John', '$2y$10$iWZuWlA5H0GrAJXhTYM3Du5h5Fkh17I7dytXk4NkU8Oa1P71eIoAa', '12301175@student.koi.edu.au', '', 2),
 (12, 'John Benny', 'Austria', '$2y$10$0WAP8bR6kp/fnrfltRje3.J2xg6UJ7/ihtTPa9mv32dl1SDPjabTq', '12301175@student.koi.edu.au2', '', 1),
-(13, 'Akiko', 'Ishijima', '$2y$10$4KM7IbcEk8ojsqahncyNxuZJgVvJmP9ecffuiVpt7hI5NMcMYu6iy', '20019026@students.koi.edu.au', '', 1);
+(13, 'Akiko', 'Ishijima', '$2y$10$4KM7IbcEk8ojsqahncyNxuZJgVvJmP9ecffuiVpt7hI5NMcMYu6iy', '20019026@students.koi.edu.au', '', 1),
+(14, 'Admin', 'Akiko', '$2y$10$7B6Ss7rdnZsFsAdGVDMGcutBLSTS2G.2QiUVu4NyGTRHVJjTKRsrK', 'akikoishijima10@gmail.com', '', 2);
 
 --
 -- Indexes for dumped tables
@@ -421,7 +486,7 @@ ALTER TABLE `Categories`
 -- AUTO_INCREMENT for table `Products`
 --
 ALTER TABLE `Products`
-  MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `Sizes`
@@ -433,7 +498,7 @@ ALTER TABLE `Sizes`
 -- AUTO_INCREMENT for table `USER`
 --
 ALTER TABLE `USER`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
