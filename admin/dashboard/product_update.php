@@ -37,16 +37,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Handle image upload (if a new image is uploaded)
     if (!empty($image['name'])) {
         $target_dir = "../../img/shop/";
-        $target_file = $target_dir . basename($image["name"]);
+        $image_name = time() . '_' . basename($image["name"]); // Avoid overwriting by appending a timestamp
+        $target_file = $target_dir . $image_name;
+        $image_file_type = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+        // Validate image file type
+        $allowed_file_types = ['jpg', 'jpeg', 'png', 'gif'];
+        if (!in_array($image_file_type, $allowed_file_types)) {
+            die("Invalid image file type. Only JPG, JPEG, PNG, and GIF are allowed.");
+        }
+
+        // Validate image size (optional, e.g., max 5MB)
+        if ($image["size"] > 5 * 1024 * 1024) {
+            die("Image size exceeds the allowed limit of 5MB.");
+        }
+
+        // Move the uploaded file to the target directory
         if (move_uploaded_file($image["tmp_name"], $target_file)) {
-            $sql = "UPDATE product SET ProductImg = ? WHERE ProductID = ?";
+            // Update the database with the new image name
+            $sql = "UPDATE Products SET ProductImg = ? WHERE ProductID = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param('si', $image['name'], $ProductID);
-            $stmt->execute();
+            $stmt->bind_param('si', $image_name, $ProductID);
+            if (!$stmt->execute()) {
+                die("Error updating product image: " . $stmt->error);
+            }
         } else {
-            die("Error uploading image.");
+            die("Error uploading the image.");
         }
     }
+
 
     // Update categories
     $conn->query("DELETE FROM ProductCategories WHERE ProductID = $ProductID");
