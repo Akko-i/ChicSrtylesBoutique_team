@@ -74,7 +74,7 @@
                     <p>Discover our most popular resort-style pieces<br class="pc_only">
                         that combine elegance with effortless charm.<br class="pc_only">
                         Shop the favorites that everyone loves!</p>
-                    <button onclick="location.href='product/DR8.php'">View detail <span>→</span></button>
+                    <button onclick="location.href='product//?1'">View detail <span>→</span></button>
                 </li>
                 <li>
                     <img src="img/top/section2.png" alt="White Cotton Dress">
