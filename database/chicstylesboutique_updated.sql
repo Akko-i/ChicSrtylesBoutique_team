@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 26, 2025 at 11:29 AM
+-- Generation Time: Jan 26, 2025 at 01:02 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,29 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `chicstylesboutique`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `billing_address`
---
-
-CREATE TABLE `billing_address` (
-  `billing_id` char(36) NOT NULL,
-  `user_id` char(36) NOT NULL,
-  `first_name` varchar(50) NOT NULL,
-  `last_name` varchar(50) NOT NULL,
-  `company_name` varchar(100) DEFAULT NULL,
-  `phone` varchar(20) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `country` varchar(50) NOT NULL,
-  `address_line1` varchar(255) NOT NULL,
-  `address_line2` varchar(255) DEFAULT NULL,
-  `suburb` varchar(50) NOT NULL,
-  `state` varchar(50) NOT NULL,
-  `postcode` varchar(10) NOT NULL,
-  `last_updated` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -133,6 +110,13 @@ CREATE TABLE `orders` (
   `tracking_number` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`order_id`, `user_id`, `order_date`, `status`, `total_price`, `shipping_address_id`, `billing_address_id`, `tracking_number`) VALUES
+(1, '13', '2025-01-27 10:00:00', 'Completed', 330.00, 'SHIP-0001', 'BILL-0001', 'TRK12345678');
+
 -- --------------------------------------------------------
 
 --
@@ -147,6 +131,14 @@ CREATE TABLE `order_items` (
   `price` decimal(10,2) NOT NULL,
   `subtotal` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_items`
+--
+
+INSERT INTO `order_items` (`order_item_id`, `order_id`, `product_id`, `quantity`, `price`, `subtotal`) VALUES
+(1, 1, 1, 2, 120.00, 240.00),
+(2, 1, 7, 1, 90.00, 90.00);
 
 -- --------------------------------------------------------
 
@@ -368,6 +360,13 @@ CREATE TABLE `shipping_address` (
   `state` varchar(50) NOT NULL,
   `postcode` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `shipping_address`
+--
+
+INSERT INTO `shipping_address` (`shipping_id`, `user_id`, `first_name`, `last_name`, `company_name`, `phone`, `email`, `country`, `address_line1`, `address_line2`, `suburb`, `state`, `postcode`) VALUES
+('SHIP-0001', '13', 'Akiko', 'Ishijima', 'Akiko Inc.', '+61411223344', '20019026@students.koi.edu.au', 'Australia', '123 Test St', 'Suite 200', 'Sydney', 'NSW', '2000');
 
 -- --------------------------------------------------------
 
