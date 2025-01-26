@@ -54,7 +54,7 @@ require_once '../config.php'; // Include the configuration file
 
     <footer>
         <div class="container">
-            <small>©2024 All Rights Reserved</small>
+            <small>©<?php echo date('Y'); ?> All Rights Reserved</small>
         </div>
     </footer>
 </body>
