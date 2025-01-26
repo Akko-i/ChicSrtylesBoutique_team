@@ -26,12 +26,13 @@ $sql = "
         s.country,
         s.phone
     FROM orders o
-    INNER JOIN user u ON o.user_id = u.user_id
+    INNER JOIN USER u ON o.user_id = u.user_id
     INNER JOIN shipping_address s ON o.shipping_address_id = s.shipping_id
     ORDER BY o.order_date DESC
 ";
 $result = $conn->query($sql);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

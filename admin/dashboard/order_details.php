@@ -9,51 +9,58 @@ if (!isset($_SESSION['admin_id'])) {
     exit();
 }
 
-// Get the order ID from the query string
-$order_id = isset($_GET['order_id']) ? intval($_GET['order_id']) : 0;
-
-// Fetch order details
-$sql = "SELECT o.order_id, o.order_date, o.status, o.total_price, o.tracking_number, 
-               u.user_first_name, u.user_last_name, 
-               sa.address_line1 AS shipping_address1, sa.address_line2 AS shipping_address2, sa.suburb AS shipping_suburb,
-               sa.state AS shipping_state, sa.postcode AS shipping_postcode, sa.country AS shipping_country, sa.phone AS shipping_phone,
-               ba.address_line1 AS billing_address1, ba.address_line2 AS billing_address2, ba.suburb AS billing_suburb,
-               ba.state AS billing_state, ba.postcode AS billing_postcode, ba.country AS billing_country, ba.phone AS billing_phone
-        FROM orders o
-        JOIN user u ON o.user_id = u.user_id
-        JOIN shipping_address sa ON o.shipping_address_id = sa.shipping_id
-        JOIN billing_address ba ON o.billing_address_id = ba.billing_id
-        WHERE o.order_id = ?";
-
-$stmt = $conn->prepare($sql);
-$stmt->bind_param('i', $order_id);
-$stmt->execute();
-$order = $stmt->get_result()->fetch_assoc();
-
-if (!$order) {
-    die("Order not found.");
+// Validate and get the order_id from the URL
+if (!isset($_GET['order_id']) || !is_numeric($_GET['order_id'])) {
+    die('Invalid order ID.');
 }
 
-// Fetch order items
-$sql_items = "SELECT oi.quantity, oi.price, p.ProductName, p.ProductImg 
-              FROM order_items oi
-              JOIN product p ON oi.ProductID = p.ProductID
-              WHERE oi.order_id = ?";
-$stmt_items = $conn->prepare($sql_items);
-$stmt_items->bind_param('i', $order_id);
-$stmt_items->execute();
-$order_items = $stmt_items->get_result();
+$order_id = intval($_GET['order_id']);
+
+// Fetch the order details
+$order_query = "
+    SELECT 
+        o.*, 
+        s.first_name AS shipping_first_name, s.last_name AS shipping_last_name, 
+        s.address_line1 AS shipping_address1, s.address_line2 AS shipping_address2, 
+        s.suburb AS shipping_suburb, s.state AS shipping_state, s.postcode AS shipping_postcode, 
+        s.country AS shipping_country, s.phone AS shipping_phone
+    FROM orders o
+    INNER JOIN shipping_address s ON o.shipping_address_id = s.shipping_id
+    WHERE o.order_id = ?
+";
+$order_stmt = $conn->prepare($order_query);
+$order_stmt->bind_param('i', $order_id);
+$order_stmt->execute();
+$order_result = $order_stmt->get_result();
+$order = $order_result->fetch_assoc();
+
+// If no order is found, show an error
+if (!$order) {
+    die('Order not found.');
+}
+
+// Fetch the order items
+$order_items_query = "
+    SELECT 
+        oi.*, 
+        p.ProductName, p.ProductImg
+    FROM order_items oi
+    INNER JOIN products p ON oi.product_id = p.ProductID
+    WHERE oi.order_id = ?
+";
+$order_items_stmt = $conn->prepare($order_items_query);
+$order_items_stmt->bind_param('i', $order_id);
+$order_items_stmt->execute();
+$order_items = $order_items_stmt->get_result();
 
 // Calculate totals
 $subtotal = 0;
 while ($item = $order_items->fetch_assoc()) {
-    $subtotal += $item['price'] * $item['quantity'];
+    $subtotal += $item['subtotal'];
 }
-$shipping_fee = 15; // Example shipping fee
+$order_items->data_seek(0); // Reset result pointer
+$shipping_fee = 15.00; // Example fixed shipping fee
 $total = $subtotal + $shipping_fee;
-
-// Reset the order items result for the loop in HTML
-$order_items->data_seek(0);
 ?>
 
 <!DOCTYPE html>
@@ -76,11 +83,10 @@ $order_items->data_seek(0);
                 <h2>Order Details</h2>
                 <section class="order-summary">
                     <form id="order-status-form" action="order_status_update.php" method="POST">
-                        <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
-                        <p><strong>Order No.:</strong> <?php echo htmlspecialchars($order['order_id']); ?></p>
+                        <input type="hidden" name="order_id" value="<?php echo htmlspecialchars($order['order_id']); ?>">
+                        <p><strong>Order No.:</strong> <?php echo str_pad($order['order_id'], 5, '0', STR_PAD_LEFT); ?></p>
                         <p><strong>Order Date:</strong> <?php echo date('d M Y', strtotime($order['order_date'])); ?></p>
 
-                        <!-- Order Status Dropdown -->
                         <fieldset>
                             <label for="order-status"><strong>Order Status:</strong></label>
                             <select id="order-status" name="status">
@@ -91,10 +97,9 @@ $order_items->data_seek(0);
                             </select>
                         </fieldset>
 
-                        <!-- Tracking Number Input -->
                         <fieldset>
                             <label for="tracking-number"><strong>Tracking Number:</strong></label>
-                            <input type="text" id="tracking-number" name="tracking_number" value="<?php echo htmlspecialchars($order['tracking_number']); ?>" placeholder="Enter tracking number">
+                            <input type="text" id="tracking-number" name="tracking_number" value="<?php echo htmlspecialchars($order['tracking_number']); ?>">
                         </fieldset>
                         
                         <button type="submit" class="update-btn">Update Order</button>
@@ -104,21 +109,10 @@ $order_items->data_seek(0);
                 <hr>
             
                 <section class="address-details">
-                    <article class="billing-details">
-                        <h3>Billing Details:</h3>
-                        <address>
-                            <?php echo htmlspecialchars($order['user_first_name'] . ' ' . $order['user_last_name']); ?><br>
-                            <?php echo htmlspecialchars($order['billing_address1']) . ' ' . htmlspecialchars($order['billing_address2']); ?><br>
-                            <?php echo htmlspecialchars($order['billing_suburb']) . ', ' . htmlspecialchars($order['billing_state']) . ' ' . htmlspecialchars($order['billing_postcode']); ?><br>
-                            <?php echo htmlspecialchars($order['billing_country']); ?><br>
-                            <?php echo htmlspecialchars($order['billing_phone']); ?>
-                        </address>
-                    </article>
-            
                     <article class="shipping-details">
                         <h3>Shipping Details:</h3>
                         <address>
-                            <?php echo htmlspecialchars($order['user_first_name'] . ' ' . $order['user_last_name']); ?><br>
+                            <?php echo htmlspecialchars($order['shipping_first_name'] . ' ' . $order['shipping_last_name']); ?><br>
                             <?php echo htmlspecialchars($order['shipping_address1']) . ' ' . htmlspecialchars($order['shipping_address2']); ?><br>
                             <?php echo htmlspecialchars($order['shipping_suburb']) . ', ' . htmlspecialchars($order['shipping_state']) . ' ' . htmlspecialchars($order['shipping_postcode']); ?><br>
                             <?php echo htmlspecialchars($order['shipping_country']); ?><br>
@@ -139,6 +133,7 @@ $order_items->data_seek(0);
                                     <td><?php echo htmlspecialchars($item['ProductName']); ?></td>
                                     <td>$<?php echo number_format($item['price'], 2); ?></td>
                                     <td>×<?php echo htmlspecialchars($item['quantity']); ?></td>
+                                    <td>Subtotal: $<?php echo number_format($item['subtotal'], 2); ?></td>
                                 </tr>
                             <?php endwhile; ?>
                         </tbody>
