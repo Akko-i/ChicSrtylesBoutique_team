@@ -9,7 +9,7 @@ if (!isset($_SESSION['admin_id'])) {
     exit();
 }
 
-// Fetch customer details along with billing addresses, excluding admins
+// Fetch customer details along with billing addresses from `billing_details`
 $sql = "
     SELECT 
         u.user_id,
@@ -25,7 +25,7 @@ $sql = "
         b.postcode,
         b.country
     FROM user u
-    LEFT JOIN billing_address b ON u.user_id = b.user_id
+    LEFT JOIN billing_details b ON u.user_id = b.user_id
     WHERE u.user_role_id = '1' -- Assuming '1' is the role ID for customers
     ORDER BY u.user_first_name ASC
 ";
