@@ -73,7 +73,7 @@
                     <p class="price">AUD ' . number_format((float)$product["ProductPrice"], 2, '.', '') . '</p>';
                     ?>
 
-                    <form action="/cart/index.php" method="POST" >
+                    <form action="<?php echo BASE_URL; ?>cart/index.php" method="POST" >
                         <!-- Size -->
                         <?php require_once "fetch_size_selector.php"; ?>
 
