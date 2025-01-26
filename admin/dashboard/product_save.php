@@ -1,4 +1,17 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+$target_dir = realpath(__DIR__ . "/../../img/shop/") . "/";
+if (!is_dir($target_dir)) {
+    die("Target directory does not exist: " . $target_dir);
+}
+if (!is_writable($target_dir)) {
+    die("Target directory is not writable: " . $target_dir);
+}
+
+
 session_start();
 require_once '../../config.php';
 require_once '../../db_connection.php';
@@ -53,12 +66,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $category_stmt->execute();
     }
 
-    // Insert stock into `product_size` table
-    $size_stmt = $conn->prepare("INSERT INTO ProductSizes (ProductID, SizeID, Stock) VALUES (?, ?, ?)");
+    // Update ProductSizes
     foreach ($size_stock as $SizeID => $stock) {
+        $size_stmt = $conn->prepare("INSERT INTO ProductSizes (ProductID, SizeID, Stock) VALUES (?, ?, ?)");
         $size_stmt->bind_param('iii', $ProductID, $SizeID, $stock);
         $size_stmt->execute();
     }
+
+    // Update ProductStock in Products table
+    $sql = "UPDATE Products 
+            SET ProductStock = (
+                SELECT COALESCE(SUM(Stock), 0) 
+                FROM ProductSizes 
+                WHERE ProductID = ?
+            ) 
+            WHERE ProductID = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('ii', $ProductID, $ProductID);
+    $stmt->execute();
+
 
     // Redirect to product list with success message
     header('Location: ' . BASE_URL . 'admin/dashboard/products.php?success=1');

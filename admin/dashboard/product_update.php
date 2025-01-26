@@ -61,13 +61,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $size_stmt = $conn->prepare("
             INSERT INTO ProductSizes (ProductID, SizeID, Stock) 
             VALUES (?, ?, ?) 
-            ON DUPLICATE KEY UPDATE stock = VALUES(stock)
+            ON DUPLICATE KEY UPDATE Stock = VALUES(Stock)
         ");
         $size_stmt->bind_param('iii', $ProductID, $SizeID, $stock);
-        if (!$size_stmt->execute()) {
-            die("Error updating size stock: " . $size_stmt->error);
-        }
+        $size_stmt->execute();
     }
+
+    // Update ProductStock in Products table
+    $sql = "UPDATE Products 
+            SET ProductStock = (
+                SELECT COALESCE(SUM(Stock), 0) 
+                FROM ProductSizes 
+                WHERE ProductID = ?
+            ) 
+            WHERE ProductID = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('ii', $ProductID, $ProductID);
+    $stmt->execute();
+
 
     // Redirect to product listing or success page
     header('Location: ' . BASE_URL . 'admin/dashboard/products.php?success=1');

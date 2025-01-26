@@ -16,6 +16,19 @@ $result = $conn->query($sql);
 if (!$result) {
     die("Error retrieving products: " . $conn->error);
 }
+
+// After deleting size stock or a size:
+$sql = "UPDATE Products 
+        SET ProductStock = (
+            SELECT COALESCE(SUM(Stock), 0) 
+            FROM ProductSizes 
+            WHERE ProductID = ?
+        ) 
+        WHERE ProductID = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param('ii', $ProductID, $ProductID);
+$stmt->execute();
+
 ?>
 
 <!DOCTYPE html>
@@ -39,6 +52,10 @@ if (!$result) {
             <main>
                 <h2>Products</h2>
                 <button class="add-product-btn" type="button" onclick="location.href='<?php echo BASE_URL; ?>admin/dashboard/products_add.php'">+ Add New Product</button>
+
+                <?php if (isset($_GET['deleted']) && $_GET['deleted'] == 1): ?>
+                    <p class="success-message" style="color:red;">Product deleted successfully!</p>
+                <?php endif; ?>
 
                 <div class="scrollable-table">
                     <table class="product-table">
