@@ -399,4 +399,7 @@ button{
       button, #fulfill-order-btn{
         width: 100%;
       }
+      .update-btn {
+        width: 100%;
+      }
   }
