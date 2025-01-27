@@ -9,7 +9,10 @@ if (!defined('BASE_URL')) {
     $relativePath = trim($relativePath, '/');
 
     // Define the base URL with a leading slash to ensure root-relative paths
-    //define('BASE_URL', '/' . $relativePath . '/');
-    define('BASE_URL', '/' . $relativePath . '/');
+    if ($relativePath == "") {
+        define('BASE_URL', '/');
+    } else {
+        define('BASE_URL', '/' . $relativePath . '/');
+    }
 }
 ?>
